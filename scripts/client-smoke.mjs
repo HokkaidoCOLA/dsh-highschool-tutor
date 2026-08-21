@@ -13,7 +13,7 @@
  * 工厂），不经过编译，所以这里在 node 里把它真实跑一遍：
  *   ① 用最小 window/document/fetch 桩加载包，确认工厂能执行、CSS 能注入；
  *   ② 用假的 ctx 调 apply()，确认注册了预期的两个插槽与选项；
- *   ③ 用 react-dom/server 把面板、复习器、徽标渲染成静态 HTML，
+ *   ③ 用 react-dom/server 把面板、讲题卡/复习翻卡、徽标渲染成静态 HTML，
  *      抓出渲染路径上的拼写错误、未定义变量、Hook 误用。
  *
  * react / react-dom 从 dsh 安装目录解析（可用 HST_REACT_PATHS 覆盖，多个用 : 分隔）；
@@ -105,18 +105,20 @@ mod.apply({
     register: (options, component) => { registered.push({ options, component }); return () => {} },
   },
 })
-ok('注册五处 UI（分区 / 徽标 / 演示卡片 / 侧栏面板 / 侧栏入口）', registered.length === 5, String(registered.length))
+ok('注册六处 UI（分区 / 徽标 / 讲题卡 / 复习翻卡 / 侧栏面板 / 侧栏入口）', registered.length === 6, String(registered.length))
 const section = registered.find((r) => r.options.name === 'settings.section')
 const badge = registered.find((r) => r.options.name === 'conversation.session.header.utilities')
-const toolview = registered.find((r) => r.options.name === 'tool.call.toolview')
+const toolviews = registered.filter((r) => r.options.name === 'tool.call.toolview')
 const dockSlot = registered.find((r) => r.options.name === 'shell.overlay')
 const launcher = registered.find((r) => r.options.name === 'sidebar.footer.action')
 ok('设置页分区 id/label 正确', section !== undefined && section.options.id === 'highschool-tutor' && section.options.label() === '高中助学')
 ok('徽标注册在标题栏工具行且排在左侧', badge !== undefined && badge.options.id === 'highschool-tutor-badge' && badge.options.order < 0)
-ok('演示卡片按工具名 keyed 注册', toolview !== undefined && toolview.options.key === 'tutor_visualize' && toolview.options.id === 'highschool-tutor-demo')
+ok('讲题卡与复习翻卡分别按工具名 keyed 注册', toolviews.length === 2
+  && toolviews.some((t) => t.options.key === 'tutor_visualize' && t.options.id === 'highschool-tutor-demo')
+  && toolviews.some((t) => t.options.key === 'tutor_review_deck' && t.options.id === 'highschool-tutor-deck'))
 ok('侧栏面板挂在 shell.overlay（加性浮层）', dockSlot !== undefined && dockSlot.options.id === 'highschool-tutor-dock')
 ok('左侧栏底部注册了演示入口', launcher !== undefined && launcher.options.id === 'highschool-tutor-demo-launcher')
-ok('先 inject 再 register', injected.length === 5 && injected.includes('settings.section') && injected.includes('shell.overlay'))
+ok('先 inject 再 register', injected.length === 6 && injected.includes('settings.section') && injected.includes('shell.overlay'))
 
 // ── ③ 静态渲染 ──────────────────────────────────────────────────────────────
 console.log('\n③ 静态渲染（effect 不执行，检查渲染路径）')
@@ -135,14 +137,8 @@ const panelHtml = render('面板首屏（加载态）', React.createElement(mod.
 ok('首屏提示加载中', panelHtml.includes('正在加载'), panelHtml.slice(0, 80))
 const badgeHtml = render('徽标（无数据时不占位）', React.createElement(mod.TutorBadge))
 ok('徽标无数据时渲染为空', badgeHtml === '')
-render('复习器（取队列中）', React.createElement(mod.ReviewRunner, {}))
-const reviewHtml = render('复习器（16:9 起步画幅）', React.createElement(mod.ReviewRunner, {}))
-ok('复习卡按画幅类渲染（加载态也成立）', reviewHtml.includes('hst_reviewStage') && reviewHtml.includes('hst_reviewEnd'))
 const cssText = styleTags[0]?.textContent ?? ''
-ok('复习卡样式：16:9 只做最矮高度（变量驱动、封顶 60vh）', cssText.includes('min-height:min(var(--hst-minh,0px),60vh)') && cssText.includes('hst_reviewBody'))
-const bodyRule = cssText.match(/\.hst_reviewBody\{[^}]*\}/)?.[0] ?? ''
-ok('复习卡样式：内容区不内滚（随内容长高）', bodyRule !== '' && !bodyRule.includes('overflow'))
-ok('复习卡字体收窄到可读下限（14/13/12）', cssText.includes('.hst_q{font-size:14px;line-height:1.7') && cssText.includes('.hst_a{font-size:13px') && cssText.includes('.hst_expl{font-size:12px'))
+ok('复习卡字体保持可读下限（14/13/12）', cssText.includes('.hst_q{font-size:14px;line-height:1.7') && cssText.includes('.hst_a{font-size:13px') && cssText.includes('.hst_expl{font-size:12px'))
 ok('对话内嵌演示卡片画布固定 16:9', cssText.includes('.hst_frameCard{aspect-ratio:16 / 9;height:auto}'))
 
 // 带真实数据形态的面板：伪造 overview 响应后再渲染，覆盖各标签页渲染路径
@@ -181,6 +177,7 @@ const todayHtml = render('今日页（含倒计时/进度/薄弱点）', React.c
 ok('今日页显示倒计时天数', todayHtml.includes('290'))
 ok('今日页显示待复习合计', todayHtml.includes('15'), '12 到期 + 3 新卡 = 15')
 ok('今日页列出薄弱知识点', todayHtml.includes('电磁感应'))
+ok('今日页不再内嵌复习闯关，只给对话入口指引', !todayHtml.includes('全科复习') && todayHtml.includes('怎么开始复习') && todayHtml.includes('抽查我'))
 const settingsHtml = render('设置页（表单+说明）', React.createElement(mod.SettingsTab, { overview, meta: { dataDir: '/tmp/hst', seedCount: 60, syllabus: { math: { modules: 6, chapters: 30 } } } }))
 ok('设置页显示数据目录', settingsHtml.includes('/tmp/hst'))
 ok('设置页列出工具用法', settingsHtml.includes('tutor_add_items'))
@@ -211,7 +208,7 @@ const scene = {
   ],
 }
 
-/** 已结算的工具调用切片（DSH 传给 tool.call.toolview 的形状）。 */
+/** 已结算的工具调用切片（DSH 传给 tool.call.toolview 的形状）：讲题卡带题目与答案。 */
 const settledBlock = {
   kind: 'tool-result',
   isError: false,
@@ -225,14 +222,23 @@ const settledBlock = {
     keySteps: [{ index: 2, title: '读出顶点' }],
     itemId: 'it_00001',
     scene,
+    question: '求 f(x)=x^2-4x+3 在 x∈[0,5] 上的最小值',
+    answer: '−1',
+    explanation: '配方得顶点 (2,−1)，开口向上，对称轴在区间内',
+    subject: 'math',
+    topic: '一元二次函数',
+    difficulty: 2,
+    itemPreview: { again: 0, hard: 1, good: 2, easy: 4 },
   },
 }
 
-const cardHtml = render('演示卡片（已结算）', React.createElement(mod.DemoToolView, { callId: 'c1', toolName: 'tutor_visualize', block: settledBlock }))
+const cardHtml = render('讲题卡（已结算）', React.createElement(mod.DemoToolView, { callId: 'c1', toolName: 'tutor_visualize', block: settledBlock }))
 ok('卡片显示演示标题', cardHtml.includes('二次函数最值'))
 ok('卡片显示场景摘要', cardHtml.includes('平面坐标系'))
 ok('卡片列出重点步骤（折叠态也能看到重点）', cardHtml.includes('读出顶点') && cardHtml.includes('重点'))
 ok('卡片提供「独立窗口」与「侧栏」两个入口', cardHtml.includes('独立窗口') && cardHtml.includes('侧栏'))
+ok('讲题卡显示题目并默认不露答案', cardHtml.includes('求 f(x)') && !cardHtml.includes('−1') && cardHtml.includes('显示答案'))
+ok('讲题卡答案区随样式提供四档评分组件', cssText.includes('.hst_grades{') && cssText.includes('.hst_gradeBtn{'))
 
 const runningHtml = render('演示卡片（生成中）', React.createElement(mod.DemoToolView, { callId: 'c2', toolName: 'tutor_visualize', block: { running: true } }))
 ok('运行中只占一行', runningHtml.includes('生成中'))
@@ -250,6 +256,23 @@ const legacyHtml = render('演示卡片（无 meta 的旧记录）', React.creat
   block: { kind: 'tool-result', isError: false, content: [{ type: 'text', text: '演示已生成' }], meta: null },
 }))
 ok('缺 meta 时退回文本行而不是崩溃', legacyHtml.includes('演示已生成'))
+
+// ── 复习翻卡套组（tutor_review_deck 的工具视图走同一组件） ─────────────────────
+const deckMeta = {
+  kind: 'hst-deck',
+  subject: 'math',
+  counts: { due: 2, new: 1, newBudget: 20, learning: 0, pool: 5 },
+  items: [{
+    id: 'it_00001', kind: 'mistake', subject: 'math', topic: '导数', difficulty: 3,
+    question: '求 f(x)=x^3-3x 的极值', answer: '极大值 2，极小值 −2',
+    explanation: 'f\'(x)=3x^2-3=0 → x=±1，定号即可', source: '一模',
+    srs: { state: 'review', reps: 2, lapses: 1 },
+    preview: { again: 0, hard: 1, good: 2, easy: 4 }, masteryScore: 55,
+  }],
+}
+const deckHtml = render('复习翻卡（首张）', React.createElement(mod.DemoToolView, { callId: 'd1', toolName: 'tutor_review_deck', block: { kind: 'tool-result', isError: false, content: [{ type: 'text', text: '已把 1 张卡片放进对话' }], meta: deckMeta } }))
+ok('翻卡显示题干与进度、不露答案', deckHtml.includes('求 f(x)=x^3-3x') && deckHtml.includes('1 / 1') && deckHtml.includes('显示答案') && !deckHtml.includes('极大值 2'))
+ok('翻卡头部有学科/难度与评分说明', deckHtml.includes('难度 3') && deckHtml.includes('空格翻面'))
 
 // ── 与 dsh-better-sidebar 集成 ──────────────────────────────────────────────
 {

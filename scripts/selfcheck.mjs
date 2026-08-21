@@ -352,9 +352,9 @@ const callTool = async (name, args = {}) => JSON.parse(await tools.find((t) => t
   check('④ 动态演示引擎', '帧文档自带 CSP 且引擎内联', frameDocument().includes('Content-Security-Policy') && frameDocument().includes('__HST__'))
 }
 
-// ── ⑤ 十三个模型工具 ─────────────────────────────────────────────────────────
+// ── ⑤ 十四个模型工具 ─────────────────────────────────────────────────────────
 {
-  check('⑤ 模型工具（13 个）', '工具数量与命名', tools.length === 13 && tools.every((t) => t.name.startsWith('tutor_')), tools.length)
+  check('⑤ 模型工具（14 个）', '工具数量与命名', tools.length === 14 && tools.every((t) => t.name.startsWith('tutor_')), tools.length)
   const paperPath = join(workdir, '一模.docx')
   writeFileSync(paperPath, makeDocx(SAMPLE_PAPER))
   const probes = [
@@ -379,11 +379,30 @@ const callTool = async (name, args = {}) => JSON.parse(await tools.find((t) => t
       pass = ok(r)
       detail = String(r.summary ?? '').slice(0, 46)
     } catch (err) { detail = `抛错 ${err.message}` }
-    check('⑤ 模型工具（13 个）', name, pass, detail)
+    check('⑤ 模型工具（14 个）', name, pass, detail)
   }
+  // 复习翻卡：把今日到期题打包成对话卡片（题目/答案/每档评分预览齐全）
+  const deck = await callTool('tutor_review_deck', { limit: 2 })
+  const deckMeta = tools.find((t) => t.name === 'tutor_review_deck').output.presentationMeta({ limit: 2 }, deck)
+  check('⑤ 模型工具（14 个）', 'tutor_review_deck',
+    deck.items.length > 0
+      && deck.items.every((it) => typeof it.question === 'string' && it.preview !== undefined && it.preview.good !== undefined)
+      && deckMeta !== null && deckMeta.kind === 'hst-deck' && deckMeta.items.length === deck.items.length,
+    `打包 ${deck.items.length} 张`)
+  // 讲题卡投影：带 item 时题目/答案/评分预览进 meta，卡片可直接翻面评分
+  const viz = await callTool('tutor_visualize', {
+    scene: EXAMPLES.plot2d,
+    persist: false,
+    item: { subject: 'math', topic: '自检', question: '自检卡题干', answer: '自检卡答案', explanation: '自检解析' },
+  })
+  const vizMeta = tools.find((t) => t.name === 'tutor_visualize').output.presentationMeta({}, viz)
+  check('⑤ 模型工具（14 个）', 'tutor_visualize 讲题卡投影',
+    vizMeta.question === '自检卡题干' && vizMeta.answer === '自检卡答案'
+      && vizMeta.itemId === (viz.item?.id ?? null) && vizMeta.itemPreview !== null,
+    vizMeta.itemId ?? '无')
   const queue = await callTool('tutor_review_queue', { limit: 2 })
   const grade = await callTool('tutor_grade_review', { grades: queue.items.map((i) => ({ id: i.id, grade: 'good' })) })
-  check('⑤ 模型工具（13 个）', 'tutor_grade_review', grade.results.length === queue.items.length, grade.summary.slice(0, 46))
+  check('⑤ 模型工具（14 个）', 'tutor_grade_review', grade.results.length === queue.items.length, grade.summary.slice(0, 46))
 }
 
 // ── ⑥ HTTP 路由 ──────────────────────────────────────────────────────────────
@@ -463,8 +482,9 @@ if (reactMod === null) {
     inject: () => {},
   })
   const names = registered.map((r) => r.name)
-  check('⑦ 浏览器半边', '注册五处 UI 插槽', registered.length === 5, names.map((n) => n.split('.').pop()).join('/'))
-  check('⑦ 浏览器半边', '演示卡片按工具名 keyed', registered.some((r) => r.name === 'tool.call.toolview' && r.key === 'tutor_visualize'))
+  check('⑦ 浏览器半边', '注册六处 UI 插槽', registered.length === 6, names.map((n) => n.split('.').pop()).join('/'))
+  check('⑦ 浏览器半边', '讲题卡/翻卡按工具名 keyed', registered.some((r) => r.name === 'tool.call.toolview' && r.key === 'tutor_visualize')
+    && registered.some((r) => r.name === 'tool.call.toolview' && r.key === 'tutor_review_deck'))
   check('⑦ 浏览器半边', 'better-sidebar 为可选依赖', mod.bs.service === null && mod.bs.usable() === false)
   check('⑦ 浏览器半边', '独立窗口桥就绪', mod.panel.path === '/api/highschool-tutor/panel.html')
   check('⑦ 浏览器半边', '自动进侧栏的判定可用', typeof mod.autoDock.should === 'function' && mod.autoDock.should('x', mod.autoDock.bootAt + 9999) === true)

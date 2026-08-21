@@ -203,8 +203,8 @@ ok('掌握度随遗忘下降', mastery(store.listItems({ query: '安培力' }, n
 // ── ⑨ 模型工具 ───────────────────────────────────────────────────────────────
 console.log('\n⑨ 模型工具')
 const tools = createTools(store)
-ok('注册 13 个工具', tools.length === 13, tools.map((t) => t.name))
-ok('工具名唯一且带 tutor_ 前缀', new Set(tools.map((t) => t.name)).size === 13 && tools.every((t) => t.name.startsWith('tutor_')))
+ok('注册 14 个工具', tools.length === 14, tools.map((t) => t.name))
+ok('工具名唯一且带 tutor_ 前缀', new Set(tools.map((t) => t.name)).size === 14 && tools.every((t) => t.name.startsWith('tutor_')))
 ok('每个工具都有描述/参数/输出', tools.every((t) => t.description.length > 20 && t.parameters.type === 'object' && typeof t.output.render === 'function'))
 
 const byName = Object.fromEntries(tools.map((t) => [t.name, t]))
@@ -216,6 +216,10 @@ const searched = JSON.parse(await byName.tutor_search_items.execute({ query: '�
 ok('tutor_search_items 命中新题', searched.total >= 1 && searched.items.some((it) => it.answer === '上升补偿流'), { total: searched.total })
 const queued = JSON.parse(await byName.tutor_review_queue.execute({ limit: 3 }))
 ok('tutor_review_queue 返回题目与评分说明', queued.items.length > 0 && queued.gradeGuide.good.includes('前进一档'))
+const deck = JSON.parse(await byName.tutor_review_deck.execute({ limit: 2 }))
+ok('tutor_review_deck 打包翻卡（含答案与每档预览）', deck.items.length > 0 && deck.items.every((it) => typeof it.answer === 'string' && it.preview.good !== undefined), `打包 ${deck.items.length} 张`)
+const deckMeta = byName.tutor_review_deck.output.presentationMeta({ limit: 2 }, deck)
+ok('tutor_review_deck 投影 hst-deck meta', deckMeta !== null && deckMeta.kind === 'hst-deck' && deckMeta.items.length === deck.items.length)
 const graded = JSON.parse(await byName.tutor_grade_review.execute({ grades: [{ id: queued.items[0].id, grade: 'hard' }] }))
 ok('tutor_grade_review 推进排期', graded.results.length === 1 && graded.results[0].intervalDays > 0, graded.summary)
 const logged = JSON.parse(await byName.tutor_study_log.execute({ subject: 'chemistry', minutes: 45, note: '离子方程式' }))
@@ -351,8 +355,8 @@ const m1 = mockCtx()
 apply(m1.ctx, null)
 ok('插件名与依赖声明正确', pluginName === 'dsh-highschool-tutor' && pluginInject.includes('tools') && pluginInject.includes('webServer'))
 ok('注册一条前缀路由', m1.routes.length === 1 && m1.routes[0].kind === 'prefix' && m1.routes[0].path === API_PREFIX, m1.routes[0]?.path)
-ok('注册 13 个工具', m1.registeredTools.length === 13, m1.registeredTools.length)
-ok('所有注册都挂在 ctx.effect 上（可热重载清理）', m1.effects.length === 14 && m1.effects.every((l) => typeof l === 'string' && l.startsWith('dsh-highschool-tutor')))
+ok('注册 14 个工具', m1.registeredTools.length === 14, m1.registeredTools.length)
+ok('所有注册都挂在 ctx.effect 上（可热重载清理）', m1.effects.length === 15 && m1.effects.every((l) => typeof l === 'string' && l.startsWith('dsh-highschool-tutor')))
 ok('启动日志含题库与数据目录', m1.logs.some((l) => l.includes('已就绪') && l.includes('highschool-tutor')), m1.logs[0])
 
 // 通过真实注册的 handler 走一遍 /meta，确认 ui 配置被注入
