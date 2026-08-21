@@ -274,6 +274,8 @@ const deckHtml = render('复习翻卡（首张）', React.createElement(mod.Demo
 ok('翻卡显示题干与进度、不露答案', deckHtml.includes('求 f(x)=x^3-3x') && deckHtml.includes('1 / 1') && deckHtml.includes('显示答案') && !deckHtml.includes('极大值 2'))
 ok('翻卡头部有学科/难度与评分说明', deckHtml.includes('难度 3') && deckHtml.includes('空格翻面'))
 render('设置页小卡片抽题（取队列中）', React.createElement(mod.QueueRunner, { onExit: () => {} }))
+const quizHtml = render('设置页小卡片抽题（宽屏弹层）', React.createElement(mod.QueueRunner, { onExit: () => {} }))
+ok('小卡片抽题以宽屏居中弹层呈现（横版观感）', quizHtml.includes('hst_quizWrap') && quizHtml.includes('hst_quiz'))
 
 // ── 与 dsh-better-sidebar 集成 ──────────────────────────────────────────────
 {
