@@ -142,6 +142,8 @@ const cssText = styleTags[0]?.textContent ?? ''
 ok('复习卡样式：16:9 只做最矮高度（变量驱动、封顶 60vh）', cssText.includes('min-height:min(var(--hst-minh,0px),60vh)') && cssText.includes('hst_reviewBody'))
 const bodyRule = cssText.match(/\.hst_reviewBody\{[^}]*\}/)?.[0] ?? ''
 ok('复习卡样式：内容区不内滚（随内容长高）', bodyRule !== '' && !bodyRule.includes('overflow'))
+ok('复习卡字体收窄到可读下限（14/13/12）', cssText.includes('.hst_q{font-size:14px;line-height:1.7') && cssText.includes('.hst_a{font-size:13px') && cssText.includes('.hst_expl{font-size:12px'))
+ok('对话内嵌演示卡片画布固定 16:9', cssText.includes('.hst_frameCard{aspect-ratio:16 / 9;height:auto}'))
 
 // 带真实数据形态的面板：伪造 overview 响应后再渲染，覆盖各标签页渲染路径
 const overview = {
