@@ -22,7 +22,7 @@
 
 import { createRequire } from 'node:module'
 import { pathToFileURL } from 'node:url'
-import { join } from 'node:path'
+import { dirname, join } from 'node:path'
 
 const req = createRequire(import.meta.url)
 const candidates = [
@@ -34,11 +34,23 @@ const candidates = [
 let React = null
 let renderToStaticMarkup = null
 try {
-  React = req(req.resolve('react', { paths: candidates }))
-  renderToStaticMarkup = req(req.resolve('react-dom/server', { paths: candidates })).renderToStaticMarkup
+  // react 与 react-dom/server 必须来自同一份副本：dsh 根 node_modules 与
+  // UI 轨迹子包里各带一份 react（18 / 19），各自 resolve 会拿到两个实例，
+  // 跨实例渲染报 "Objects are not valid as a React child"。
+  // 先解析 react-dom/server，再取其同层 node_modules 里的兄弟包 react。
+  const serverPath = req.resolve('react-dom/server', { paths: candidates })
+  const nmDir = dirname(dirname(serverPath))
+  React = req(join(nmDir, 'react'))
+  renderToStaticMarkup = req(serverPath).renderToStaticMarkup
 } catch {
-  console.log('– 跳过客户端渲染测试（未找到 react / react-dom，安装到 profile 后由浏览器验证）')
-  process.exit(0)
+  // 退化：各自解析（只在环境恰好一致时可用）。
+  try {
+    React = req(req.resolve('react', { paths: candidates }))
+    renderToStaticMarkup = req(req.resolve('react-dom/server', { paths: candidates })).renderToStaticMarkup
+  } catch {
+    console.log('– 跳过客户端渲染测试（未找到 react / react-dom，安装到 profile 后由浏览器验证）')
+    process.exit(0)
+  }
 }
 
 let passed = 0
@@ -124,6 +136,10 @@ ok('首屏提示加载中', panelHtml.includes('正在加载'), panelHtml.slice(
 const badgeHtml = render('徽标（无数据时不占位）', React.createElement(mod.TutorBadge))
 ok('徽标无数据时渲染为空', badgeHtml === '')
 render('复习器（取队列中）', React.createElement(mod.ReviewRunner, {}))
+const reviewHtml = render('复习器（16:9 画幅）', React.createElement(mod.ReviewRunner, {}))
+ok('复习卡按 16:9 画幅渲染（加载态也成立）', reviewHtml.includes('hst_reviewStage') && reviewHtml.includes('hst_reviewEnd'))
+const cssText = styleTags[0]?.textContent ?? ''
+ok('复习卡样式声明 16:9、内容区滚动、评分区钉底', cssText.includes('aspect-ratio:16 / 9') && cssText.includes('hst_reviewBody') && cssText.includes('hst_reviewFoot'))
 
 // 带真实数据形态的面板：伪造 overview 响应后再渲染，覆盖各标签页渲染路径
 const overview = {
