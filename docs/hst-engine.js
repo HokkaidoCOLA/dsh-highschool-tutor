@@ -3551,10 +3551,14 @@
       this.applyBare()
     },
 
-    /** bare：只画图示与步骤条，不显示顶部标题/副标题行（抽题卡的右侧图示区要纯图）。 */
+    /** bare/compact：只画图示与步骤条——bare 隐藏顶部标题行，
+     *  compact 同时收起步骤说明（给抽题卡的右侧图示区让高度、不挤画布）。 */
     applyBare: function () {
-      if (!this.elTop) return
-      this.elTop.style.display = this.bare === true ? 'none' : ''
+      if (this.elTop) this.elTop.style.display = (this.bare === true || this.compact === true) ? 'none' : ''
+      if (this.elStep) {
+        var has = this.scene && this.scene.steps && this.scene.steps.length > 0
+        this.elStep.style.display = (this.compact === true || has !== true) ? 'none' : ''
+      }
     },
 
     /** 渲染标题栏与步骤芯片等固定部分。 */
@@ -3878,6 +3882,7 @@
         if (data.theme) applyTheme(data.theme)
         if (data.mode) { player.mode = data.mode }
         if (data.bare === true) player.bare = true
+        if (data.compact === true) player.compact = true
         if (Number.isFinite(data.ratio)) player.viewRatio = data.ratio
         player.load(data.scene)
       } else if (data.type === MSG.step && typeof data.index === 'number') {
