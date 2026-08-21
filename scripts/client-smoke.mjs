@@ -177,7 +177,7 @@ const todayHtml = render('今日页（含倒计时/进度/薄弱点）', React.c
 ok('今日页显示倒计时天数', todayHtml.includes('290'))
 ok('今日页显示待复习合计', todayHtml.includes('15'), '12 到期 + 3 新卡 = 15')
 ok('今日页列出薄弱知识点', todayHtml.includes('电磁感应'))
-ok('今日页不再内嵌复习闯关，只给对话入口指引', !todayHtml.includes('全科复习') && todayHtml.includes('怎么开始复习') && todayHtml.includes('抽查我'))
+ok('今日页保留小卡片抽题入口，也提示对话翻卡', todayHtml.includes('开始复习') && todayHtml.includes('全科复习') && todayHtml.includes('抽查我'))
 const settingsHtml = render('设置页（表单+说明）', React.createElement(mod.SettingsTab, { overview, meta: { dataDir: '/tmp/hst', seedCount: 60, syllabus: { math: { modules: 6, chapters: 30 } } } }))
 ok('设置页显示数据目录', settingsHtml.includes('/tmp/hst'))
 ok('设置页列出工具用法', settingsHtml.includes('tutor_add_items'))
@@ -273,6 +273,7 @@ const deckMeta = {
 const deckHtml = render('复习翻卡（首张）', React.createElement(mod.DemoToolView, { callId: 'd1', toolName: 'tutor_review_deck', block: { kind: 'tool-result', isError: false, content: [{ type: 'text', text: '已把 1 张卡片放进对话' }], meta: deckMeta } }))
 ok('翻卡显示题干与进度、不露答案', deckHtml.includes('求 f(x)=x^3-3x') && deckHtml.includes('1 / 1') && deckHtml.includes('显示答案') && !deckHtml.includes('极大值 2'))
 ok('翻卡头部有学科/难度与评分说明', deckHtml.includes('难度 3') && deckHtml.includes('空格翻面'))
+render('设置页小卡片抽题（取队列中）', React.createElement(mod.QueueRunner, { onExit: () => {} }))
 
 // ── 与 dsh-better-sidebar 集成 ──────────────────────────────────────────────
 {
