@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>太阳光照图：极昼极夜与正午太阳高度 · 高中助学动态演示</title>
+<style>
+:root{color-scheme:light dark;--pg-fg:#0f1115;--pg-fg2:#61666b;--pg-bg:#fff;--pg-card:#fff;--pg-line:rgba(0,0,0,.1)}
+@media (prefers-color-scheme:dark){:root{--pg-fg:#e8eaed;--pg-fg2:#a8adb4;--pg-bg:#15171a;--pg-card:#1b1d21;--pg-line:rgba(255,255,255,.12)}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--pg-bg);color:var(--pg-fg);
+font:14px/1.7 system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+.wrap{max-width:860px;margin:0 auto;padding:28px 20px 60px}
+a{color:inherit}
+.top{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:6px}
+h1{font-size:20px;margin:0;line-height:1.4}
+.sub{color:var(--pg-fg2);font-size:13px;margin:0 0 22px}
+.tag{font-size:11.5px;padding:2px 8px;border-radius:999px;color:#fff;white-space:nowrap}
+.q{background:var(--pg-card);border:1px solid var(--pg-line);border-left:3px solid #3964fe;
+border-radius:10px;padding:12px 14px;margin:0 0 18px;font-size:13.5px;white-space:pre-wrap}
+.stage{background:var(--pg-card);border:1px solid var(--pg-line);border-radius:14px;padding:14px}
+.back{display:inline-block;margin-bottom:16px;font-size:13px;color:var(--pg-fg2);text-decoration:none}
+.back:hover{color:var(--pg-fg)}
+.hint{color:var(--pg-fg2);font-size:12.5px;margin:14px 0 0}
+.grid{display:grid;gap:10px}
+.card{display:block;background:var(--pg-card);border:1px solid var(--pg-line);border-radius:12px;
+padding:12px 14px;text-decoration:none}
+.card:hover{border-color:#3964fe}
+.card h3{margin:0 0 4px;font-size:14.5px;line-height:1.45;font-weight:600}
+.card p{margin:0;font-size:12.5px;color:var(--pg-fg2)}
+.sec{margin:26px 0 10px;font-size:13px;font-weight:600;display:flex;align-items:center;gap:8px}
+.dot{width:9px;height:9px;border-radius:50%}
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="back" href="./index.html">← 返回全部演示</a>
+<div class="top">
+<h1>太阳光照图：极昼极夜与正午太阳高度</h1>
+<span class="tag" style="background:#6b8f2f">地理</span>
+</div>
+<p class="sub">地球的运动 · 地球光照 · 6 个对象 · 6 个步骤 · 2 个重点步骤</p>
+<p class="q">读太阳光照图：判断节气与极昼范围，计算北京（40°N）与悉尼（34°S）的正午太阳高度。</p>
+<div class="stage"><div id="hst-root"></div></div>
+<p class="hint">点步骤编号或 ▶ 自动播放；★ 是重点步骤。2D 图可拖动平移、滚轮缩放；3D 图可拖动旋转、双击复位。键盘 ← → 切步，空格播放。</p>
+</div>
+<script src="./hst-engine.js"></script>
+<script>
+(function () {
+  var NS = (typeof globalThis !== 'undefined' && globalThis.__HST__) || window.__HST__;
+  var THEMES = {"light":{"fg":"#0f1115","fg2":"#61666b","fg3":"#81858c","bg":"#ffffff","bg2":"rgba(38,49,72,.05)","line":"rgba(0,0,0,.12)","brand":"#3964fe","good":"#16a34a","warn":"#e08b1a","bad":"#dc2626","scheme":"light"},"dark":{"fg":"#e8eaed","fg2":"#a8adb4","fg3":"#82878e","bg":"#1b1d21","bg2":"rgba(255,255,255,.06)","line":"rgba(255,255,255,.14)","brand":"#6f8cff","good":"#3ec46d","warn":"#f0a93a","bad":"#f26a6a","scheme":"dark"}};
+  var dark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  var player = NS.mount({
+    mode: 'panel',
+    theme: dark ? THEMES.dark : THEMES.light,
+    scene: {"v":1,"kind":"globe3d","title":"太阳光照图：极昼极夜与正午太阳高度","subject":"geography","topic":"地球的运动","caption":"同一张图只换直射点纬度 δ，就能读出三个节气（可拖动旋转地球）","view":{"yaw":-30,"pitch":16},"objects":[{"id":"earth","type":"globe","label":"冬至日（12 月 22 日前后）","declination":-23.5},{"id":"rays","type":"sunray","label":"太阳光","n":5},{"id":"spolar","type":"arc","label":"南极圈内：极昼","hidden":true,"from":-180,"to":180,"lat":-72},{"id":"npolar","type":"arc","label":"北极圈内：极夜","hidden":true,"from":-180,"to":180,"lat":72},{"id":"bj","type":"point","label":"北京 40°N","hidden":true,"value":1,"lat":40,"lon":0},{"id":"syd","type":"point","label":"悉尼 34°S","hidden":true,"value":1,"lat":-34,"lon":0}],"steps":[{"title":"第一步：先定直射点纬度","detail":"冬至日太阳直射南回归线，即 δ = 23.5°S。图上那个黄点就是直射点，它所在的经线此刻是正午 12 点。所有计算都从这个 δ 开始。","formula":"δ = 23°26′S ≈ −23.5°（南纬记作负）","key":false,"focus":["earth"]},{"title":"第二步：读晨昏线——谁极昼谁极夜","detail":"黄色大圆是晨昏线，把地球分成昼半球（亮）与夜半球（暗）。记住：极昼出现在直射点所在的那个半球。现在直射南半球，所以南极圈内全天见太阳（极昼），北极圈内全天不见太阳（极夜）——很多人习惯性写成北极极昼，这里一看图就不会错。","formula":"极昼范围：南纬 66.5° ~ 90°　极夜范围：北纬 66.5° ~ 90°","key":false,"show":["spolar","npolar"],"focus":["spolar","npolar"]},{"title":"第三步：用纬度差算正午太阳高度","detail":"公式只有一条：正午太阳高度 = 90° 减去「当地纬度与直射点纬度之差」。北京 40°N 与直射点 23.5°S 一南一北，纬度差要相加：40 + 23.5 = 63.5°。这是整道题最容易错的地方——把南纬记作负值代进绝对值就不会错。图上的数字是引擎按这个公式自己算出来的。","formula":"H = 90° − |φ − δ| = 90° − |40° − (−23.5°)| = 26.5°","key":true,"show":["bj"],"focus":["bj"]},{"title":"第四步：同一天的悉尼为何很高","detail":"悉尼 34°S 与直射点同在南半球，纬度差相减，只有 34 − 23.5 = 10.5°，所以正午太阳高度高达 79.5°。对照北京的 26.5°，规律很清楚：离直射点越近，正午太阳越高。","formula":"H = 90° − |(−34°) − (−23.5°)| = 90° − 10.5° = 79.5°","key":false,"show":["syd"],"focus":["syd","bj"]},{"title":"第五步：只换 δ，整张图翻过来","detail":"现在只把 δ 从 −23.5° 改成 +23.5°，其余一个字没动：整张光照图翻了过来——极昼跑到北极圈，北京的正午太阳高度变成 73.5°，而悉尼降到 32.5°。图上的数字是自动重算的，公式本身一个字都没改。","formula":"北京：90° − |40° − 23.5°| = 73.5°　悉尼：90° − |(−34°) − 23.5°| = 32.5°","key":true,"hide":["spolar","npolar"],"focus":["bj","syd"],"set":{"earth":{"declination":23.5,"label":"夏至日（6 月 22 日前后）"}}},{"title":"第六步：二分日作为第三个坐标","detail":"再把 δ 改为 0°：直射赤道，晨昏线正好过南北极点，全球昼夜等长，北京 H = 50°。三个日期一对比就彻底清楚了：正午太阳高度只取决于「当地纬度与直射点纬度的差」。北京一年的三个关键值：26.5° → 50° → 73.5°。","formula":"二分日 δ = 0°：北京 H = 90° − 40° = 50°，全球昼夜平分","key":false,"focus":["earth","bj"],"set":{"earth":{"declination":0,"label":"春分 / 秋分（3 月 21 日 · 9 月 23 日前后）"}}}]}
+  });
+  // 跟随系统明暗切换：重新桥接调色板并重绘
+  if (window.matchMedia) {
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function (ev) {
+      NS.applyTheme(ev.matches ? THEMES.dark : THEMES.light);
+      player.render();
+    });
+  }
+})();
+</script>
+</body>
+</html>

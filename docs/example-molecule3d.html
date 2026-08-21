@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CH₄ / NH₃ / H₂O：价层电子对与分子形状 · 高中助学动态演示</title>
+<style>
+:root{color-scheme:light dark;--pg-fg:#0f1115;--pg-fg2:#61666b;--pg-bg:#fff;--pg-card:#fff;--pg-line:rgba(0,0,0,.1)}
+@media (prefers-color-scheme:dark){:root{--pg-fg:#e8eaed;--pg-fg2:#a8adb4;--pg-bg:#15171a;--pg-card:#1b1d21;--pg-line:rgba(255,255,255,.12)}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--pg-bg);color:var(--pg-fg);
+font:14px/1.7 system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+.wrap{max-width:860px;margin:0 auto;padding:28px 20px 60px}
+a{color:inherit}
+.top{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:6px}
+h1{font-size:20px;margin:0;line-height:1.4}
+.sub{color:var(--pg-fg2);font-size:13px;margin:0 0 22px}
+.tag{font-size:11.5px;padding:2px 8px;border-radius:999px;color:#fff;white-space:nowrap}
+.q{background:var(--pg-card);border:1px solid var(--pg-line);border-left:3px solid #3964fe;
+border-radius:10px;padding:12px 14px;margin:0 0 18px;font-size:13.5px;white-space:pre-wrap}
+.stage{background:var(--pg-card);border:1px solid var(--pg-line);border-radius:14px;padding:14px}
+.back{display:inline-block;margin-bottom:16px;font-size:13px;color:var(--pg-fg2);text-decoration:none}
+.back:hover{color:var(--pg-fg)}
+.hint{color:var(--pg-fg2);font-size:12.5px;margin:14px 0 0}
+.grid{display:grid;gap:10px}
+.card{display:block;background:var(--pg-card);border:1px solid var(--pg-line);border-radius:12px;
+padding:12px 14px;text-decoration:none}
+.card:hover{border-color:#3964fe}
+.card h3{margin:0 0 4px;font-size:14.5px;line-height:1.45;font-weight:600}
+.card p{margin:0;font-size:12.5px;color:var(--pg-fg2)}
+.sec{margin:26px 0 10px;font-size:13px;font-weight:600;display:flex;align-items:center;gap:8px}
+.dot{width:9px;height:9px;border-radius:50%}
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="back" href="./index.html">← 返回全部演示</a>
+<div class="top">
+<h1>CH₄ / NH₃ / H₂O：价层电子对与分子形状</h1>
+<span class="tag" style="background:#e08b1a">化学</span>
+</div>
+<p class="sub">分子结构与性质 · 分子构型 · 4 个对象 · 3 个步骤 · 1 个重点步骤</p>
+
+<div class="stage"><div id="hst-root"></div></div>
+<p class="hint">点步骤编号或 ▶ 自动播放；★ 是重点步骤。2D 图可拖动平移、滚轮缩放；3D 图可拖动旋转、双击复位。键盘 ← → 切步，空格播放。</p>
+</div>
+<script src="./hst-engine.js"></script>
+<script>
+(function () {
+  var NS = (typeof globalThis !== 'undefined' && globalThis.__HST__) || window.__HST__;
+  var THEMES = {"light":{"fg":"#0f1115","fg2":"#61666b","fg3":"#81858c","bg":"#ffffff","bg2":"rgba(38,49,72,.05)","line":"rgba(0,0,0,.12)","brand":"#3964fe","good":"#16a34a","warn":"#e08b1a","bad":"#dc2626","scheme":"light"},"dark":{"fg":"#e8eaed","fg2":"#a8adb4","fg3":"#82878e","bg":"#1b1d21","bg2":"rgba(255,255,255,.06)","line":"rgba(255,255,255,.14)","brand":"#6f8cff","good":"#3ec46d","warn":"#f0a93a","bad":"#f26a6a","scheme":"dark"}};
+  var dark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  var player = NS.mount({
+    mode: 'panel',
+    theme: dark ? THEMES.dark : THEMES.light,
+    scene: {"v":1,"kind":"molecule3d","title":"CH₄ / NH₃ / H₂O：价层电子对与分子形状","subject":"chemistry","topic":"分子结构与性质","caption":"价层电子对数都是 4，孤对电子越多键角越小","view":{"yaw":28,"pitch":12},"objects":[{"id":"ch4","type":"molecule","label":"CH₄ 正四面体 109°28′","x":-1.5,"center":"C","geometry":"tetrahedral","ligands":["H","H","H","H"]},{"id":"nh3","type":"molecule","label":"NH₃ 三角锥 107°","hidden":true,"x":0.15,"value":1,"center":"N","geometry":"trigonal-pyramidal","ligands":["H","H","H"]},{"id":"h2o","type":"molecule","label":"H₂O V 形 104.5°","hidden":true,"x":1.75,"value":2,"center":"O","geometry":"bent","ligands":["H","H"]},{"id":"tip","type":"label3","color":"#61666b","text":"孤对电子对成键电子对的排斥更强 ⇒ 键角被压小","hidden":true,"x":0,"y":-1.55,"z":0}],"steps":[{"title":"CH₄：4 对成键电子","detail":"中心 C 有 4 个 σ 键、0 个孤对，价层电子对相互排斥取正四面体，键角 109°28′。","formula":"价层电子对数 = 4，孤对 = 0","key":false,"focus":["ch4"]},{"title":"NH₃：3 键 + 1 孤对","detail":"仍是 4 对电子，但其中一对是孤对，占据一个顶点后分子呈三角锥形。","formula":"4 = 3 + 1（孤对）","key":false,"show":["nh3"],"focus":["nh3"]},{"title":"H₂O：2 键 + 2 孤对","detail":"关键规律：孤对电子的排斥作用更强，把成键电子对「挤」得更近，所以键角 109°28′ → 107° → 104.5° 依次减小。","formula":"109°28′ > 107° > 104.5°","key":true,"show":["h2o","tip"],"focus":["h2o","tip"]}]}
+  });
+  // 跟随系统明暗切换：重新桥接调色板并重绘
+  if (window.matchMedia) {
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function (ev) {
+      NS.applyTheme(ev.matches ? THEMES.dark : THEMES.light);
+      player.render();
+    });
+  }
+})();
+</script>
+</body>
+</html>

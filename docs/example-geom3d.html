@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>正方体中过 A、C、B₁ 的截面 · 高中助学动态演示</title>
+<style>
+:root{color-scheme:light dark;--pg-fg:#0f1115;--pg-fg2:#61666b;--pg-bg:#fff;--pg-card:#fff;--pg-line:rgba(0,0,0,.1)}
+@media (prefers-color-scheme:dark){:root{--pg-fg:#e8eaed;--pg-fg2:#a8adb4;--pg-bg:#15171a;--pg-card:#1b1d21;--pg-line:rgba(255,255,255,.12)}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--pg-bg);color:var(--pg-fg);
+font:14px/1.7 system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+.wrap{max-width:860px;margin:0 auto;padding:28px 20px 60px}
+a{color:inherit}
+.top{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:6px}
+h1{font-size:20px;margin:0;line-height:1.4}
+.sub{color:var(--pg-fg2);font-size:13px;margin:0 0 22px}
+.tag{font-size:11.5px;padding:2px 8px;border-radius:999px;color:#fff;white-space:nowrap}
+.q{background:var(--pg-card);border:1px solid var(--pg-line);border-left:3px solid #3964fe;
+border-radius:10px;padding:12px 14px;margin:0 0 18px;font-size:13.5px;white-space:pre-wrap}
+.stage{background:var(--pg-card);border:1px solid var(--pg-line);border-radius:14px;padding:14px}
+.back{display:inline-block;margin-bottom:16px;font-size:13px;color:var(--pg-fg2);text-decoration:none}
+.back:hover{color:var(--pg-fg)}
+.hint{color:var(--pg-fg2);font-size:12.5px;margin:14px 0 0}
+.grid{display:grid;gap:10px}
+.card{display:block;background:var(--pg-card);border:1px solid var(--pg-line);border-radius:12px;
+padding:12px 14px;text-decoration:none}
+.card:hover{border-color:#3964fe}
+.card h3{margin:0 0 4px;font-size:14.5px;line-height:1.45;font-weight:600}
+.card p{margin:0;font-size:12.5px;color:var(--pg-fg2)}
+.sec{margin:26px 0 10px;font-size:13px;font-weight:600;display:flex;align-items:center;gap:8px}
+.dot{width:9px;height:9px;border-radius:50%}
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="back" href="./index.html">← 返回全部演示</a>
+<div class="top">
+<h1>正方体中过 A、C、B₁ 的截面</h1>
+<span class="tag" style="background:#2f6df6">数学</span>
+</div>
+<p class="sub">空间向量与立体几何 · 立体几何 · 7 个对象 · 4 个步骤 · 2 个重点步骤</p>
+
+<div class="stage"><div id="hst-root"></div></div>
+<p class="hint">点步骤编号或 ▶ 自动播放；★ 是重点步骤。2D 图可拖动平移、滚轮缩放；3D 图可拖动旋转、双击复位。键盘 ← → 切步，空格播放。</p>
+</div>
+<script src="./hst-engine.js"></script>
+<script>
+(function () {
+  var NS = (typeof globalThis !== 'undefined' && globalThis.__HST__) || window.__HST__;
+  var THEMES = {"light":{"fg":"#0f1115","fg2":"#61666b","fg3":"#81858c","bg":"#ffffff","bg2":"rgba(38,49,72,.05)","line":"rgba(0,0,0,.12)","brand":"#3964fe","good":"#16a34a","warn":"#e08b1a","bad":"#dc2626","scheme":"light"},"dark":{"fg":"#e8eaed","fg2":"#a8adb4","fg3":"#82878e","bg":"#1b1d21","bg2":"rgba(255,255,255,.06)","line":"rgba(255,255,255,.14)","brand":"#6f8cff","good":"#3ec46d","warn":"#f0a93a","bad":"#f26a6a","scheme":"dark"}};
+  var dark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  var player = NS.mount({
+    mode: 'panel',
+    theme: dark ? THEMES.dark : THEMES.light,
+    scene: {"v":1,"kind":"geom3d","title":"正方体中过 A、C、B₁ 的截面","subject":"math","topic":"空间向量与立体几何","caption":"截面是正三角形；可拖动旋转从不同角度确认","view":{"yaw":38,"pitch":20},"objects":[{"id":"cube","type":"solid","color":"#2f6df6","w":1.6,"shape":"cube","hollow":true,"vertices":["A","B","C","D","A₁","B₁","C₁","D₁"]},{"id":"sec","type":"section","color":"#dc2626","label":"截面","hidden":true,"of":"cube","normal":[1,1,1],"through":[0.27,0.27,0.27]},{"id":"ac","type":"segment3","color":"#16a34a","width":2.4,"label":"AC","hidden":true,"points":[[-0.8,-0.8,0.8],[0.8,-0.8,-0.8]]},{"id":"ab1","type":"segment3","color":"#16a34a","width":2.4,"label":"AB₁","hidden":true,"points":[[-0.8,-0.8,0.8],[0.8,0.8,0.8]]},{"id":"cb1","type":"segment3","color":"#16a34a","width":2.4,"label":"CB₁","hidden":true,"points":[[0.8,-0.8,-0.8],[0.8,0.8,0.8]]},{"id":"diag","type":"segment3","color":"#8b5cf6","dash":true,"label":"体对角线 AC₁","hidden":true,"points":[[-0.8,-0.8,0.8],[0.8,0.8,-0.8]]},{"id":"tip","type":"label3","color":"#61666b","text":"三条棱上的对角线两两相等 ⇒ 正三角形","hidden":true,"x":0,"y":1.35,"z":0}],"steps":[{"title":"看清正方体的顶点标注","detail":"底面 ABCD，上面 A₁B₁C₁D₁，注意 A 与 A₁ 上下对应。","formula":"","key":false,"focus":["cube"]},{"title":"连出三条面对角线","detail":"A、C、B₁ 三点分别在三个不同的面上，两两连线都是正方形的对角线。","formula":"","key":false,"show":["ac","ab1","cb1"],"focus":["ac","ab1","cb1"]},{"title":"三边相等 ⇒ 正三角形","detail":"设棱长为 a，则 AC=AB₁=CB₁=√2·a，所以截面 △ACB₁ 是正三角形。","formula":"AC = AB₁ = CB₁ = √2 a","key":true,"show":["sec","tip"],"focus":["sec"]},{"title":"与体对角线的关系","detail":"体对角线 AC₁ 垂直于这个截面——这是「三垂线」与向量法都常用的结论。","formula":"AC₁ ⊥ 平面 ACB₁","key":true,"show":["diag"],"focus":["diag","sec"],"view":{"yaw":62,"pitch":26}}]}
+  });
+  // 跟随系统明暗切换：重新桥接调色板并重绘
+  if (window.matchMedia) {
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function (ev) {
+      NS.applyTheme(ev.matches ? THEMES.dark : THEMES.light);
+      player.render();
+    });
+  }
+})();
+</script>
+</body>
+</html>

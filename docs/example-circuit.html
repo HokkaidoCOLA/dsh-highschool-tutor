@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>滑动变阻器对电路的影响 · 高中助学动态演示</title>
+<style>
+:root{color-scheme:light dark;--pg-fg:#0f1115;--pg-fg2:#61666b;--pg-bg:#fff;--pg-card:#fff;--pg-line:rgba(0,0,0,.1)}
+@media (prefers-color-scheme:dark){:root{--pg-fg:#e8eaed;--pg-fg2:#a8adb4;--pg-bg:#15171a;--pg-card:#1b1d21;--pg-line:rgba(255,255,255,.12)}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--pg-bg);color:var(--pg-fg);
+font:14px/1.7 system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+.wrap{max-width:860px;margin:0 auto;padding:28px 20px 60px}
+a{color:inherit}
+.top{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:6px}
+h1{font-size:20px;margin:0;line-height:1.4}
+.sub{color:var(--pg-fg2);font-size:13px;margin:0 0 22px}
+.tag{font-size:11.5px;padding:2px 8px;border-radius:999px;color:#fff;white-space:nowrap}
+.q{background:var(--pg-card);border:1px solid var(--pg-line);border-left:3px solid #3964fe;
+border-radius:10px;padding:12px 14px;margin:0 0 18px;font-size:13.5px;white-space:pre-wrap}
+.stage{background:var(--pg-card);border:1px solid var(--pg-line);border-radius:14px;padding:14px}
+.back{display:inline-block;margin-bottom:16px;font-size:13px;color:var(--pg-fg2);text-decoration:none}
+.back:hover{color:var(--pg-fg)}
+.hint{color:var(--pg-fg2);font-size:12.5px;margin:14px 0 0}
+.grid{display:grid;gap:10px}
+.card{display:block;background:var(--pg-card);border:1px solid var(--pg-line);border-radius:12px;
+padding:12px 14px;text-decoration:none}
+.card:hover{border-color:#3964fe}
+.card h3{margin:0 0 4px;font-size:14.5px;line-height:1.45;font-weight:600}
+.card p{margin:0;font-size:12.5px;color:var(--pg-fg2)}
+.sec{margin:26px 0 10px;font-size:13px;font-weight:600;display:flex;align-items:center;gap:8px}
+.dot{width:9px;height:9px;border-radius:50%}
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="back" href="./index.html">← 返回全部演示</a>
+<div class="top">
+<h1>滑动变阻器对电路的影响</h1>
+<span class="tag" style="background:#0f9d8f">物理</span>
+</div>
+<p class="sub">电路及其应用 · 电路图 · 13 个对象 · 4 个步骤 · 1 个重点步骤</p>
+
+<div class="stage"><div id="hst-root"></div></div>
+<p class="hint">点步骤编号或 ▶ 自动播放；★ 是重点步骤。2D 图可拖动平移、滚轮缩放；3D 图可拖动旋转、双击复位。键盘 ← → 切步，空格播放。</p>
+</div>
+<script src="./hst-engine.js"></script>
+<script>
+(function () {
+  var NS = (typeof globalThis !== 'undefined' && globalThis.__HST__) || window.__HST__;
+  var THEMES = {"light":{"fg":"#0f1115","fg2":"#61666b","fg3":"#81858c","bg":"#ffffff","bg2":"rgba(38,49,72,.05)","line":"rgba(0,0,0,.12)","brand":"#3964fe","good":"#16a34a","warn":"#e08b1a","bad":"#dc2626","scheme":"light"},"dark":{"fg":"#e8eaed","fg2":"#a8adb4","fg3":"#82878e","bg":"#1b1d21","bg2":"rgba(255,255,255,.06)","line":"rgba(255,255,255,.14)","brand":"#6f8cff","good":"#3ec46d","warn":"#f0a93a","bad":"#f26a6a","scheme":"dark"}};
+  var dark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  var player = NS.mount({
+    mode: 'panel',
+    theme: dark ? THEMES.dark : THEMES.light,
+    scene: {"v":1,"kind":"circuit","title":"滑动变阻器对电路的影响","subject":"physics","topic":"电路及其应用","caption":"滑片移动 → R 变 → 总电阻变 → 干路电流变 → 各表读数变","view":{"xMin":0,"xMax":100,"yMin":0,"yMax":56},"objects":[{"id":"w1","type":"wire","points":[[18,14],[18,42],[40,42]]},{"id":"w2","type":"wire","points":[[58,42],[82,42],[82,14]]},{"id":"w3","type":"wire","points":[[18,14],[40,14]]},{"id":"w4","type":"wire","points":[[58,14],[82,14]]},{"id":"bat","type":"battery","label":"E, r","x":18,"y":28,"orient":"v"},{"id":"A","type":"ammeter","label":"A","x":49,"y":42},{"id":"R","type":"resistor","label":"R₀","x":49,"y":14},{"id":"Rh","type":"rheostat","label":"R′","x":82,"y":28,"orient":"v"},{"id":"V","type":"voltmeter","label":"V","hidden":true,"x":63,"y":28,"orient":"v"},{"id":"vw1","type":"wire","hidden":true,"points":[[63,21.5],[63,14]]},{"id":"vw2","type":"wire","hidden":true,"points":[[63,34.5],[63,42]]},{"id":"cur","type":"wire","color":"#dc2626","label":"I","hidden":true,"arrow":true,"points":[[26,42],[34,42]]},{"id":"note","type":"label","color":"#61666b","text":"滑片右移 ⇒ R′ 增大 ⇒ I 减小 ⇒ U_R 减小","hidden":true,"x":50,"y":51}],"steps":[{"title":"先认清是串联还是并联","detail":"电源、电流表、R₀、滑动变阻器首尾相接，只有一条路径 ⇒ 串联电路。","formula":"","key":false,"focus":["bat","A","R","Rh"]},{"title":"标出电流方向","detail":"电流从电源正极流出，经外电路回到负极；串联电路各处电流相同。","formula":"","key":false,"show":["cur"],"focus":["cur"]},{"title":"接入电压表测 R₀ 两端电压","detail":"电压表要并联在被测元件两端，且内阻很大、几乎不分流。","formula":"","key":false,"show":["V","vw1","vw2"],"focus":["V"]},{"title":"滑片移动后的连锁反应","detail":"这类题的通用思路：局部电阻变化 → 总电阻 → 干路电流 → 再回到各元件的电压。","formula":"I = E / (R₀ + R′ + r)\nU_R = I·R₀","key":true,"show":["note"],"focus":["Rh","note"]}]}
+  });
+  // 跟随系统明暗切换：重新桥接调色板并重绘
+  if (window.matchMedia) {
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function (ev) {
+      NS.applyTheme(ev.matches ? THEMES.dark : THEMES.light);
+      player.render();
+    });
+  }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>正方体中证明平面 ACC₁A₁ ⊥ 平面 BDD₁B₁ · 高中助学动态演示</title>
+<style>
+:root{color-scheme:light dark;--pg-fg:#0f1115;--pg-fg2:#61666b;--pg-bg:#fff;--pg-card:#fff;--pg-line:rgba(0,0,0,.1)}
+@media (prefers-color-scheme:dark){:root{--pg-fg:#e8eaed;--pg-fg2:#a8adb4;--pg-bg:#15171a;--pg-card:#1b1d21;--pg-line:rgba(255,255,255,.12)}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--pg-bg);color:var(--pg-fg);
+font:14px/1.7 system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+.wrap{max-width:860px;margin:0 auto;padding:28px 20px 60px}
+a{color:inherit}
+.top{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:6px}
+h1{font-size:20px;margin:0;line-height:1.4}
+.sub{color:var(--pg-fg2);font-size:13px;margin:0 0 22px}
+.tag{font-size:11.5px;padding:2px 8px;border-radius:999px;color:#fff;white-space:nowrap}
+.q{background:var(--pg-card);border:1px solid var(--pg-line);border-left:3px solid #3964fe;
+border-radius:10px;padding:12px 14px;margin:0 0 18px;font-size:13.5px;white-space:pre-wrap}
+.stage{background:var(--pg-card);border:1px solid var(--pg-line);border-radius:14px;padding:14px}
+.back{display:inline-block;margin-bottom:16px;font-size:13px;color:var(--pg-fg2);text-decoration:none}
+.back:hover{color:var(--pg-fg)}
+.hint{color:var(--pg-fg2);font-size:12.5px;margin:14px 0 0}
+.grid{display:grid;gap:10px}
+.card{display:block;background:var(--pg-card);border:1px solid var(--pg-line);border-radius:12px;
+padding:12px 14px;text-decoration:none}
+.card:hover{border-color:#3964fe}
+.card h3{margin:0 0 4px;font-size:14.5px;line-height:1.45;font-weight:600}
+.card p{margin:0;font-size:12.5px;color:var(--pg-fg2)}
+.sec{margin:26px 0 10px;font-size:13px;font-weight:600;display:flex;align-items:center;gap:8px}
+.dot{width:9px;height:9px;border-radius:50%}
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="back" href="./index.html">← 返回全部演示</a>
+<div class="top">
+<h1>正方体中证明平面 ACC₁A₁ ⊥ 平面 BDD₁B₁</h1>
+<span class="tag" style="background:#2f6df6">数学</span>
+</div>
+<p class="sub">立体几何初步 · 立体几何 · 11 个对象 · 6 个步骤 · 2 个重点步骤</p>
+<p class="q">在正方体 ABCD-A₁B₁C₁D₁ 中，求证：平面 ACC₁A₁ ⊥ 平面 BDD₁B₁。</p>
+<div class="stage"><div id="hst-root"></div></div>
+<p class="hint">点步骤编号或 ▶ 自动播放；★ 是重点步骤。2D 图可拖动平移、滚轮缩放；3D 图可拖动旋转、双击复位。键盘 ← → 切步，空格播放。</p>
+</div>
+<script src="./hst-engine.js"></script>
+<script>
+(function () {
+  var NS = (typeof globalThis !== 'undefined' && globalThis.__HST__) || window.__HST__;
+  var THEMES = {"light":{"fg":"#0f1115","fg2":"#61666b","fg3":"#81858c","bg":"#ffffff","bg2":"rgba(38,49,72,.05)","line":"rgba(0,0,0,.12)","brand":"#3964fe","good":"#16a34a","warn":"#e08b1a","bad":"#dc2626","scheme":"light"},"dark":{"fg":"#e8eaed","fg2":"#a8adb4","fg3":"#82878e","bg":"#1b1d21","bg2":"rgba(255,255,255,.06)","line":"rgba(255,255,255,.14)","brand":"#6f8cff","good":"#3ec46d","warn":"#f0a93a","bad":"#f26a6a","scheme":"dark"}};
+  var dark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  var player = NS.mount({
+    mode: 'panel',
+    theme: dark ? THEMES.dark : THEMES.light,
+    scene: {"v":1,"kind":"geom3d","title":"正方体中证明平面 ACC₁A₁ ⊥ 平面 BDD₁B₁","subject":"math","topic":"立体几何初步","caption":"证面面垂直 = 在一个面里找一条直线垂直于另一个面","view":{"yaw":34,"pitch":18},"objects":[{"id":"cube","type":"solid","color":"#2f6df6","w":1.6,"shape":"cube","wire":true,"vertices":["A","B","C","D","A₁","B₁","C₁","D₁"]},{"id":"p1","type":"face","color":"#dc2626","opacity":0.26,"label":"平面ACC₁A₁","points":[[-0.8,-0.8,0.8],[0.8,-0.8,-0.8],[0.8,0.8,-0.8],[-0.8,0.8,0.8]]},{"id":"p2","type":"face","color":"#16a34a","opacity":0.26,"label":"平面BDD₁B₁","points":[[0.8,-0.8,0.8],[-0.8,-0.8,-0.8],[-0.8,0.8,-0.8],[0.8,0.8,0.8]]},{"id":"base","type":"face","color":"#81858c","opacity":0.16,"label":"底面ABCD","hidden":true,"points":[[-0.8,-0.8,0.8],[0.8,-0.8,0.8],[0.8,-0.8,-0.8],[-0.8,-0.8,-0.8]]},{"id":"ac","type":"segment3","color":"#dc2626","width":3.2,"label":"AC","hidden":true,"points":[[-0.8,-0.8,0.8],[0.8,-0.8,-0.8]]},{"id":"bd","type":"segment3","color":"#16a34a","width":3.2,"label":"BD","hidden":true,"points":[[0.8,-0.8,0.8],[-0.8,-0.8,-0.8]]},{"id":"dd1","type":"segment3","color":"#8b5cf6","width":3.4,"label":"DD₁","hidden":true,"points":[[-0.8,-0.8,-0.8],[-0.8,0.8,-0.8]]},{"id":"o","type":"point3","color":"#dc2626","label":"O","hidden":true,"x":0,"y":-0.8,"z":0},{"id":"ang1","type":"angle3","color":"#e08b1a","hidden":true,"r":0.32,"points":[[0,-0.8,0],[-0.8,-0.8,0.8],[0.8,-0.8,0.8]]},{"id":"ang2","type":"angle3","color":"#e08b1a","hidden":true,"r":0.32,"points":[[-0.8,-0.8,-0.8],[-0.8,0.8,-0.8],[-0.8,-0.8,0.8]]},{"id":"tip","type":"label3","color":"#61666b","text":"两个对角面互相垂直","hidden":true,"x":0,"y":1.5,"z":0}],"steps":[{"title":"看清要证的是哪两个面","detail":"平面 ACC₁A₁ 与平面 BDD₁B₁ 都是正方体的「对角面」——各自由一条底面对角线和两条竖棱围成的矩形。先在图上把它们分清楚，再谈证明。","formula":"","key":false,"focus":["p1","p2"]},{"title":"转化目标：不要去找两面的夹角","detail":"面面垂直的判定定理告诉我们：只要在其中一个平面里找到一条直线，它垂直于另一个平面，两面就垂直。所以任务变成「在平面 ACC₁A₁ 里挑一条线」——自然挑 AC。","formula":"a ⊥ β，且 a ⊂ α  ⇒  α ⊥ β","key":false,"show":["base"],"hide":["p1","p2"]},{"title":"第①步：AC ⊥ BD","detail":"底面 ABCD 是正方形，正方形的两条对角线互相垂直，交于中心 O。这一步只用到平面几何。","formula":"ABCD 是正方形 ⇒ AC ⊥ BD","key":false,"show":["ac","bd","o","ang1"],"focus":["ac","bd","ang1"]},{"title":"第②步：AC ⊥ DD₁","detail":"DD₁ 是竖棱，垂直于底面 ABCD；而 AC 在底面内，所以 DD₁ ⊥ AC。注意：AC 与 DD₁ 并不相交（是异面直线），照样可以垂直——依据是「垂直于平面的直线垂直于平面内任意一条直线」。","formula":"DD₁ ⊥ 平面ABCD，AC ⊂ 平面ABCD ⇒ DD₁ ⊥ AC","key":false,"show":["dd1","ang2"],"focus":["dd1","ang2"]},{"title":"第③步：两条相交直线 ⇒ AC 垂直于整个平面","detail":"这是全题唯一容易丢分的地方：光有 AC⊥BD 或光有 AC⊥DD₁ 都不够，必须凑齐「两条相交直线」并交代它们都在平面 BDD₁B₁ 内。BD 与 DD₁ 恰好交于 D，条件齐了。","formula":"BD ∩ DD₁ = D，BD、DD₁ ⊂ 平面BDD₁B₁ ⇒ AC ⊥ 平面BDD₁B₁","key":true,"show":["p2"],"hide":["base"],"focus":["p2","ac"]},{"title":"第④步：回到面面垂直","detail":"AC 垂直于平面 BDD₁B₁，而 AC 本身就在平面 ACC₁A₁ 里，判定定理的两个条件全部满足。答题时这句「AC ⊂ 平面 ACC₁A₁」不能省。","formula":"AC ⊥ 平面BDD₁B₁，AC ⊂ 平面ACC₁A₁ ⇒ 平面ACC₁A₁ ⊥ 平面BDD₁B₁","key":true,"show":["p1","tip"],"focus":["p1","p2"],"view":{"yaw":58,"pitch":24}}]}
+  });
+  // 跟随系统明暗切换：重新桥接调色板并重绘
+  if (window.matchMedia) {
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function (ev) {
+      NS.applyTheme(ev.matches ? THEMES.dark : THEMES.light);
+      player.render();
+    });
+  }
+})();
+</script>
+</body>
+</html>

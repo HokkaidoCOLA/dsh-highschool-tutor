@@ -1,0 +1,49 @@
+{
+  "name": "@dsh-external/dsh-highschool-tutor",
+  "version": "0.1.0",
+  "description": "高中三年学习与巩固助手（语数英物化地）：错题本 + 艾宾浩斯间隔复习、知识卡片库、讲题时自动生成 2D/3D 动态演示、AI 出题与批改工具、每日计划与进度统计、高考倒计时与模考趋势",
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "education",
+    "spaced-repetition",
+    "visualization",
+    "chinese-high-school",
+    "gaokao"
+  ],
+  "private": true,
+  "type": "module",
+  "main": "./lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./client": "./lib/client.js",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib",
+    "cordis.patch.yml"
+  ],
+  "license": "GPL-3.0-or-later",
+  "scripts": {
+    "test": "node scripts/smoke.mjs && node scripts/frame-smoke.mjs && node scripts/client-smoke.mjs",
+    "selfcheck": "node scripts/selfcheck.mjs",
+    "selfcheck:live": "node scripts/selfcheck.mjs --live",
+    "smoke": "node scripts/smoke.mjs",
+    "smoke:frame": "node scripts/frame-smoke.mjs",
+    "smoke:client": "node scripts/client-smoke.mjs",
+    "preview": "node scripts/preview.mjs",
+    "showcase": "node scripts/showcase.mjs"
+  },
+  "dsh": {
+    "client": {
+      "inject": [],
+      "platform": "web"
+    },
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "peerDependencies": {
+    "react": ">=18"
+  }
+}

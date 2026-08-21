@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>高中助学 · 动态演示画廊</title>
+<style>
+:root{color-scheme:light dark;--pg-fg:#0f1115;--pg-fg2:#61666b;--pg-bg:#fff;--pg-card:#fff;--pg-line:rgba(0,0,0,.1)}
+@media (prefers-color-scheme:dark){:root{--pg-fg:#e8eaed;--pg-fg2:#a8adb4;--pg-bg:#15171a;--pg-card:#1b1d21;--pg-line:rgba(255,255,255,.12)}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--pg-bg);color:var(--pg-fg);
+font:14px/1.7 system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+.wrap{max-width:860px;margin:0 auto;padding:28px 20px 60px}
+a{color:inherit}
+.top{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:6px}
+h1{font-size:20px;margin:0;line-height:1.4}
+.sub{color:var(--pg-fg2);font-size:13px;margin:0 0 22px}
+.tag{font-size:11.5px;padding:2px 8px;border-radius:999px;color:#fff;white-space:nowrap}
+.q{background:var(--pg-card);border:1px solid var(--pg-line);border-left:3px solid #3964fe;
+border-radius:10px;padding:12px 14px;margin:0 0 18px;font-size:13.5px;white-space:pre-wrap}
+.stage{background:var(--pg-card);border:1px solid var(--pg-line);border-radius:14px;padding:14px}
+.back{display:inline-block;margin-bottom:16px;font-size:13px;color:var(--pg-fg2);text-decoration:none}
+.back:hover{color:var(--pg-fg)}
+.hint{color:var(--pg-fg2);font-size:12.5px;margin:14px 0 0}
+.grid{display:grid;gap:10px}
+.card{display:block;background:var(--pg-card);border:1px solid var(--pg-line);border-radius:12px;
+padding:12px 14px;text-decoration:none}
+.card:hover{border-color:#3964fe}
+.card h3{margin:0 0 4px;font-size:14.5px;line-height:1.45;font-weight:600}
+.card p{margin:0;font-size:12.5px;color:var(--pg-fg2)}
+.sec{margin:26px 0 10px;font-size:13px;font-weight:600;display:flex;align-items:center;gap:8px}
+.dot{width:9px;height:9px;border-radius:50%}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>高中助学 · 动态演示画廊</h1>
+<p class="sub">16 份可交互演示，覆盖数学 / 物理 / 化学 / 地理。每份都带分步解题时间轴，★ 标出重点步骤。<br>
+全部离线渲染：无网络请求、无第三方库，引擎 138 KB（指纹 4-31am）。</p>
+<div class="sec"><span class="dot" style="background:#2f6df6"></span>数学</div>
+<div class="grid">
+<a class="card" href="./math-perpendicular-planes.html">
+<h3>正方体中证明平面 ACC₁A₁ ⊥ 平面 BDD₁B₁</h3>
+<p>立体几何 · 立体几何初步 · 6 个步骤 · 2 个重点</p>
+</a>
+<a class="card" href="./example-plot2d.html">
+<h3>导数的几何意义：f(x)=x³−3x 在 x=1 处的切线</h3>
+<p>平面坐标系 · 一元函数的导数及其应用 · 5 个步骤 · 1 个重点</p>
+</a>
+<a class="card" href="./example-geom3d.html">
+<h3>正方体中过 A、C、B₁ 的截面</h3>
+<p>立体几何 · 空间向量与立体几何 · 4 个步骤 · 2 个重点</p>
+</a>
+</div>
+<div class="sec"><span class="dot" style="background:#0f9d8f"></span>物理</div>
+<div class="grid">
+<a class="card" href="./physics-projectile.html">
+<h3>平抛运动：分解、落地时间与落地速度</h3>
+<p>力学场景 · 抛体运动 · 6 个步骤 · 2 个重点</p>
+</a>
+<a class="card" href="./example-mech2d.html">
+<h3>斜面上滑块的受力分析与分解</h3>
+<p>力学场景 · 相互作用——力 · 4 个步骤 · 2 个重点</p>
+</a>
+<a class="card" href="./example-circuit.html">
+<h3>滑动变阻器对电路的影响</h3>
+<p>电路图 · 电路及其应用 · 4 个步骤 · 1 个重点</p>
+</a>
+</div>
+<div class="sec"><span class="dot" style="background:#e08b1a"></span>化学</div>
+<div class="grid">
+<a class="card" href="./chem-ethylene-oxidation.html">
+<h3>乙烯被酸性 KMnO₄ 氧化：C=C 断裂 → 两个 CO₂</h3>
+<p>分子构型 · 有机化合物（乙烯·乙醇·乙酸） · 6 个步骤 · 3 个重点</p>
+</a>
+<a class="card" href="./example-chart2d.html">
+<h3>升温对化学平衡的影响（v−t 图）</h3>
+<p>过程曲线 · 化学反应速率与化学平衡 · 4 个步骤 · 1 个重点</p>
+</a>
+<a class="card" href="./example-molecule3d.html">
+<h3>CH₄ / NH₃ / H₂O：价层电子对与分子形状</h3>
+<p>分子构型 · 分子结构与性质 · 3 个步骤 · 1 个重点</p>
+</a>
+<a class="card" href="./example-lattice3d.html">
+<h3>NaCl 晶胞：微粒数与配位数</h3>
+<p>晶体晶胞 · 晶体结构与性质 · 3 个步骤 · 1 个重点</p>
+</a>
+<a class="card" href="./example-diagram2d.html">
+<h3>工业制硫酸的流程</h3>
+<p>示意图 · 化工生产中的重要非金属元素（硫·氮） · 4 个步骤 · 1 个重点</p>
+</a>
+</div>
+<div class="sec"><span class="dot" style="background:#6b8f2f"></span>地理</div>
+<div class="grid">
+<a class="card" href="./geo-sunlight-altitude.html">
+<h3>太阳光照图：极昼极夜与正午太阳高度</h3>
+<p>地球光照 · 地球的运动 · 6 个步骤 · 2 个重点</p>
+</a>
+<a class="card" href="./geo-climate-chart.html">
+<h3>气温降水图判读：三步定出地中海气候</h3>
+<p>过程曲线 · 气候类型判别与成因 · 6 个步骤 · 4 个重点</p>
+</a>
+<a class="card" href="./example-globe3d.html">
+<h3>夏至日光照图与正午太阳高度</h3>
+<p>地球光照 · 地球的运动 · 4 个步骤 · 1 个重点</p>
+</a>
+</div>
+<div class="sec"><span class="dot" style="background:#d4483b"></span>语文</div>
+<div class="grid">
+<a class="card" href="./chinese-argument-skeleton.html">
+<h3>议论文论证骨架：《答案易得，问题难求》</h3>
+<p>示意图 · 议论文结构与素材 · 6 个步骤 · 3 个重点</p>
+</a>
+</div>
+<div class="sec"><span class="dot" style="background:#8b5cf6"></span>英语</div>
+<div class="grid">
+<a class="card" href="./english-reading-mapping.html">
+<h3>阅读理解题文对应：四类题各自看哪里</h3>
+<p>示意图 · 阅读理解（细节·推断·主旨·猜词） · 6 个步骤 · 3 个重点</p>
+</a>
+</div>
+<p class="hint" style="margin-top:30px">
+由 <a href="https://github.com/HokkaidoCOLA/dsh-highschool-tutor">dsh-highschool-tutor</a> 生成 ·
+<code>node scripts/showcase.mjs</code> 可随时重新生成本画廊。
+</p>
+</div>
+</body>
+</html>

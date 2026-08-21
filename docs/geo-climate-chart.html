@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>气温降水图判读：三步定出地中海气候 · 高中助学动态演示</title>
+<style>
+:root{color-scheme:light dark;--pg-fg:#0f1115;--pg-fg2:#61666b;--pg-bg:#fff;--pg-card:#fff;--pg-line:rgba(0,0,0,.1)}
+@media (prefers-color-scheme:dark){:root{--pg-fg:#e8eaed;--pg-fg2:#a8adb4;--pg-bg:#15171a;--pg-card:#1b1d21;--pg-line:rgba(255,255,255,.12)}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--pg-bg);color:var(--pg-fg);
+font:14px/1.7 system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+.wrap{max-width:860px;margin:0 auto;padding:28px 20px 60px}
+a{color:inherit}
+.top{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:6px}
+h1{font-size:20px;margin:0;line-height:1.4}
+.sub{color:var(--pg-fg2);font-size:13px;margin:0 0 22px}
+.tag{font-size:11.5px;padding:2px 8px;border-radius:999px;color:#fff;white-space:nowrap}
+.q{background:var(--pg-card);border:1px solid var(--pg-line);border-left:3px solid #3964fe;
+border-radius:10px;padding:12px 14px;margin:0 0 18px;font-size:13.5px;white-space:pre-wrap}
+.stage{background:var(--pg-card);border:1px solid var(--pg-line);border-radius:14px;padding:14px}
+.back{display:inline-block;margin-bottom:16px;font-size:13px;color:var(--pg-fg2);text-decoration:none}
+.back:hover{color:var(--pg-fg)}
+.hint{color:var(--pg-fg2);font-size:12.5px;margin:14px 0 0}
+.grid{display:grid;gap:10px}
+.card{display:block;background:var(--pg-card);border:1px solid var(--pg-line);border-radius:12px;
+padding:12px 14px;text-decoration:none}
+.card:hover{border-color:#3964fe}
+.card h3{margin:0 0 4px;font-size:14.5px;line-height:1.45;font-weight:600}
+.card p{margin:0;font-size:12.5px;color:var(--pg-fg2)}
+.sec{margin:26px 0 10px;font-size:13px;font-weight:600;display:flex;align-items:center;gap:8px}
+.dot{width:9px;height:9px;border-radius:50%}
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="back" href="./index.html">← 返回全部演示</a>
+<div class="top">
+<h1>气温降水图判读：三步定出地中海气候</h1>
+<span class="tag" style="background:#6b8f2f">地理</span>
+</div>
+<p class="sub">气候类型判别与成因 · 过程曲线 · 12 个对象 · 6 个步骤 · 4 个重点步骤</p>
+<p class="q">读某地各月气温与降水量图：判断半球、气候类型、分布规律与成因。</p>
+<div class="stage"><div id="hst-root"></div></div>
+<p class="hint">点步骤编号或 ▶ 自动播放；★ 是重点步骤。2D 图可拖动平移、滚轮缩放；3D 图可拖动旋转、双击复位。键盘 ← → 切步，空格播放。</p>
+</div>
+<script src="./hst-engine.js"></script>
+<script>
+(function () {
+  var NS = (typeof globalThis !== 'undefined' && globalThis.__HST__) || window.__HST__;
+  var THEMES = {"light":{"fg":"#0f1115","fg2":"#61666b","fg3":"#81858c","bg":"#ffffff","bg2":"rgba(38,49,72,.05)","line":"rgba(0,0,0,.12)","brand":"#3964fe","good":"#16a34a","warn":"#e08b1a","bad":"#dc2626","scheme":"light"},"dark":{"fg":"#e8eaed","fg2":"#a8adb4","fg3":"#82878e","bg":"#1b1d21","bg2":"rgba(255,255,255,.06)","line":"rgba(255,255,255,.14)","brand":"#6f8cff","good":"#3ec46d","warn":"#f0a93a","bad":"#f26a6a","scheme":"dark"}};
+  var dark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  var player = NS.mount({
+    mode: 'panel',
+    theme: dark ? THEMES.dark : THEMES.light,
+    scene: {"v":1,"kind":"chart2d","title":"气温降水图判读：三步定出地中海气候","subject":"geography","topic":"气候类型判别与成因","caption":"三步定案：看气温定半球 → 看最冷月定温带 → 看降水季节分配定类型","view":{"xMin":0.2,"xMax":12.8,"yMin":-5,"yMax":30,"xLabel":"月份","yLabel":"气温℃（降水 mm = ×10）"},"objects":[{"id":"rain","type":"bar","color":"#2f6df6","opacity":0.7,"label":"降水量","w":0.62,"data":[[1,8],[2,7.5],[3,6.5],[4,5.5],[5,4],[6,2],[7,1.5],[8,2.5],[9,7],[10,11],[11,11.5],[12,10]]},{"id":"temp","type":"series","color":"#dc2626","width":2.4,"label":"气温","shape":"line-dots","data":[[1,8],[2,9],[3,11],[4,14],[5,18],[6,22],[7,25],[8,25],[9,22],[10,17],[11,12],[12,9]]},{"id":"hot","type":"marker","color":"#dc2626","label":"最热月 7—8月 25℃","hidden":true,"x":7.5,"y":25},{"id":"cold","type":"marker","color":"#2f6df6","label":"最冷月 1月 8℃","hidden":true,"x":1,"y":8},{"id":"l15","type":"hline","color":"#e08b1a","label":"15℃","hidden":true,"y":15},{"id":"l0","type":"hline","color":"#81858c","label":"0℃","hidden":true,"y":0},{"id":"zone","type":"label","color":"#e08b1a","size":12,"text":"最冷月在 0~15℃ 之间 ⇒ 亚热带","hidden":true,"x":4.4,"y":11.6},{"id":"summer","type":"region","color":"#e08b1a","opacity":0.16,"label":"夏季降水极少","hidden":true,"x1":5.5,"y1":-3,"x2":8.5,"y2":28},{"id":"winter1","type":"region","color":"#2f6df6","opacity":0.14,"label":"冬季多雨","hidden":true,"x1":0.4,"y1":-3,"x2":2.5,"y2":28},{"id":"winter2","type":"region","color":"#2f6df6","opacity":0.14,"hidden":true,"x1":11.5,"y1":-3,"x2":12.6,"y2":28},{"id":"verdict","type":"label","color":"#dc2626","size":13,"text":"夏干冬雨 ⇒ 地中海气候","hidden":true,"x":7,"y":-3.6},{"id":"cause","type":"label","color":"#61666b","size":11.5,"text":"夏：副高控制，下沉→干燥　冬：西风带影响→湿潪","hidden":true,"x":6.6,"y":28.6}],"steps":[{"title":"第一步：先读懂两条曲线","detail":"这类图上有两套数据：**蓝色柱是降水（mm）、红色线是气温（℃）**。按教材惯例，温度轴 1℃ 对应降水 10mm——所以图上 8 格高的柱子代表 80mm 降水。先把两套数据分清楚，再动手判断。","formula":"左轴：气温 ℃　右轴（隐含）：降水 mm = ℃ × 10","key":false,"focus":["rain","temp"]},{"title":"第二步：定半球——看气温最高月","detail":"定半球**只看气温，不看降水**。气温最高出现在 7、8 月，最低在 1 月——七八月是北半球的夏季，所以该地在北半球。很多人习惯性先去找雨季，结果第一步就错了。","formula":"7、8 月温高 ⇒ 北半球（1、2 月温高则为南半球）","key":true,"show":["hot","cold"],"focus":["hot","cold"]},{"title":"第三步：定温带——只看最冷月","detail":"定温带**只看最冷月**，不看年均温。1 月约 8℃，落在 0℃ 与 15℃ 两条线之间，所以是亚热带。判据记牢：>15℃ 热带；0~15℃ 亚热带或温带海洋性；−15~0℃ 温带；<−15℃ 寒带。","formula":"最冷月 8℃ ∈ (0℃, 15℃) ⇒ 亚热带","key":true,"show":["l15","l0","zone"],"focus":["cold","zone"]},{"title":"第四步：定类型——看雨季落在哪个季节","detail":"关键一步。看柱子：夏季 6—8 月降水最少（局部 15~25mm），冬季 12—2 月反而最多（近 80~115mm）——**夏干冬雨**。十二种气候里只有地中海气候长这个样，这就是它的身份证。","formula":"亚热带 + 夏干冬雨 ⇒ 地中海气候","key":true,"show":["summer","winter1","winter2","verdict"],"focus":["summer","winter1","verdict"]},{"title":"第五步：分布与成因","detail":"分布在南北纬 30°~40° 大陆西岸。成因是**气压带与风带的季节移动**：夏季整体北移，该地落入副热带高气压带，气流下沉、炎热干燥；冬季整体南移，该地落入西风带，温和湿潪。这也解释了为何它只出现在这个纬度带的西岸。","formula":"夏：副热高控制　冬：西风带控制","key":false,"show":["cause"],"focus":["cause"]},{"title":"易错对比：别和亚热带季风搞反","detail":"**亚热带季风气候**的最冷月也在 0~15℃，光看温带两者分不出来；但它是**夏雨冬干**（雨季在 6—9 月），与地中海气候正好相反。所以第四步那个「雨季落在哪个季节」不能省。农业上本地以柑橘、油橄榄、葡萄等亚热带水果为特色。","formula":"地中海：夏干冬雨　亚热季风：夏雨冬干","key":true,"focus":["summer","winter1"]}]}
+  });
+  // 跟随系统明暗切换：重新桥接调色板并重绘
+  if (window.matchMedia) {
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function (ev) {
+      NS.applyTheme(ev.matches ? THEMES.dark : THEMES.light);
+      player.render();
+    });
+  }
+})();
+</script>
+</body>
+</html>

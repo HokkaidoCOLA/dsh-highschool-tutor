@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>升温对化学平衡的影响（v−t 图） · 高中助学动态演示</title>
+<style>
+:root{color-scheme:light dark;--pg-fg:#0f1115;--pg-fg2:#61666b;--pg-bg:#fff;--pg-card:#fff;--pg-line:rgba(0,0,0,.1)}
+@media (prefers-color-scheme:dark){:root{--pg-fg:#e8eaed;--pg-fg2:#a8adb4;--pg-bg:#15171a;--pg-card:#1b1d21;--pg-line:rgba(255,255,255,.12)}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--pg-bg);color:var(--pg-fg);
+font:14px/1.7 system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+.wrap{max-width:860px;margin:0 auto;padding:28px 20px 60px}
+a{color:inherit}
+.top{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:6px}
+h1{font-size:20px;margin:0;line-height:1.4}
+.sub{color:var(--pg-fg2);font-size:13px;margin:0 0 22px}
+.tag{font-size:11.5px;padding:2px 8px;border-radius:999px;color:#fff;white-space:nowrap}
+.q{background:var(--pg-card);border:1px solid var(--pg-line);border-left:3px solid #3964fe;
+border-radius:10px;padding:12px 14px;margin:0 0 18px;font-size:13.5px;white-space:pre-wrap}
+.stage{background:var(--pg-card);border:1px solid var(--pg-line);border-radius:14px;padding:14px}
+.back{display:inline-block;margin-bottom:16px;font-size:13px;color:var(--pg-fg2);text-decoration:none}
+.back:hover{color:var(--pg-fg)}
+.hint{color:var(--pg-fg2);font-size:12.5px;margin:14px 0 0}
+.grid{display:grid;gap:10px}
+.card{display:block;background:var(--pg-card);border:1px solid var(--pg-line);border-radius:12px;
+padding:12px 14px;text-decoration:none}
+.card:hover{border-color:#3964fe}
+.card h3{margin:0 0 4px;font-size:14.5px;line-height:1.45;font-weight:600}
+.card p{margin:0;font-size:12.5px;color:var(--pg-fg2)}
+.sec{margin:26px 0 10px;font-size:13px;font-weight:600;display:flex;align-items:center;gap:8px}
+.dot{width:9px;height:9px;border-radius:50%}
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="back" href="./index.html">← 返回全部演示</a>
+<div class="top">
+<h1>升温对化学平衡的影响（v−t 图）</h1>
+<span class="tag" style="background:#e08b1a">化学</span>
+</div>
+<p class="sub">化学反应速率与化学平衡 · 过程曲线 · 9 个对象 · 4 个步骤 · 1 个重点步骤</p>
+
+<div class="stage"><div id="hst-root"></div></div>
+<p class="hint">点步骤编号或 ▶ 自动播放；★ 是重点步骤。2D 图可拖动平移、滚轮缩放；3D 图可拖动旋转、双击复位。键盘 ← → 切步，空格播放。</p>
+</div>
+<script src="./hst-engine.js"></script>
+<script>
+(function () {
+  var NS = (typeof globalThis !== 'undefined' && globalThis.__HST__) || window.__HST__;
+  var THEMES = {"light":{"fg":"#0f1115","fg2":"#61666b","fg3":"#81858c","bg":"#ffffff","bg2":"rgba(38,49,72,.05)","line":"rgba(0,0,0,.12)","brand":"#3964fe","good":"#16a34a","warn":"#e08b1a","bad":"#dc2626","scheme":"light"},"dark":{"fg":"#e8eaed","fg2":"#a8adb4","fg3":"#82878e","bg":"#1b1d21","bg2":"rgba(255,255,255,.06)","line":"rgba(255,255,255,.14)","brand":"#6f8cff","good":"#3ec46d","warn":"#f0a93a","bad":"#f26a6a","scheme":"dark"}};
+  var dark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  var player = NS.mount({
+    mode: 'panel',
+    theme: dark ? THEMES.dark : THEMES.light,
+    scene: {"v":1,"kind":"chart2d","title":"升温对化学平衡的影响（v−t 图）","subject":"chemistry","topic":"化学反应速率与化学平衡","caption":"正逆反应速率都增大，但吸热方向增得更多 ⇒ 平衡正向移动","view":{"xMin":0,"xMax":10,"yMin":0,"yMax":10,"xLabel":"t","yLabel":"v"},"objects":[{"id":"vf","type":"series","color":"#dc2626","label":"v(正)","data":[[0,6],[1,4.4],[2,3.5],[3,3.1],[4,3],[5,3]]},{"id":"vr","type":"series","color":"#2f6df6","label":"v(逆)","data":[[0,0],[1,1.7],[2,2.5],[3,2.9],[4,3],[5,3]]},{"id":"eq1","type":"marker","color":"#61666b","label":"第一次平衡","x":4,"y":3,"dashed":true},{"id":"jump","type":"vline","color":"#e08b1a","label":"升温","hidden":true,"x":5},{"id":"vf2","type":"series","color":"#dc2626","hidden":true,"data":[[5,7.6],[6,6.6],[7,6.1],[8,5.9],[9,5.9],[10,5.9]]},{"id":"vr2","type":"series","color":"#2f6df6","hidden":true,"data":[[5,6.4],[6,5.9],[7,5.9],[8,5.9],[9,5.9],[10,5.9]]},{"id":"eq2","type":"marker","color":"#61666b","label":"新平衡","hidden":true,"x":8,"y":5.9,"dashed":true},{"id":"gap","type":"region","color":"#e08b1a","label":"v正 > v逆","hidden":true,"x1":5,"y1":6.4,"x2":6.4,"y2":7.6},{"id":"note","type":"label","color":"#61666b","text":"正反应吸热：升温 → 正向移动\n（若放热则相反）","hidden":true,"x":7.4,"y":1.6}],"steps":[{"title":"读第一段：建立平衡","detail":"起始只有反应物 ⇒ v正 从最大开始降，v逆 从 0 开始升，相等时达到平衡。","formula":"","key":false,"focus":["vf","vr","eq1"]},{"title":"t=5 时升高温度","detail":"温度升高使正逆速率同时突增——注意两条线都是「跳一下」，不是只跳一条。","formula":"","key":false,"show":["jump","vf2","vr2"],"focus":["jump"]},{"title":"比较跳后的高低决定移动方向","detail":"关键：升温后 v正 跳得比 v逆 高（吸热方向增幅更大），所以平衡向正反应方向移动。","formula":"ΔH > 0，升温 ⇒ v正 > v逆 ⇒ 正向移动","key":true,"show":["gap"],"focus":["gap"]},{"title":"重新达到平衡","detail":"新平衡时速率仍相等，但数值比原来更大——温度越高，达到平衡越快。","formula":"","key":false,"show":["eq2","note"],"focus":["eq2"]}]}
+  });
+  // 跟随系统明暗切换：重新桥接调色板并重绘
+  if (window.matchMedia) {
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function (ev) {
+      NS.applyTheme(ev.matches ? THEMES.dark : THEMES.light);
+      player.render();
+    });
+  }
+})();
+</script>
+</body>
+</html>

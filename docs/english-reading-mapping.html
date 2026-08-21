@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>阅读理解题文对应：四类题各自看哪里 · 高中助学动态演示</title>
+<style>
+:root{color-scheme:light dark;--pg-fg:#0f1115;--pg-fg2:#61666b;--pg-bg:#fff;--pg-card:#fff;--pg-line:rgba(0,0,0,.1)}
+@media (prefers-color-scheme:dark){:root{--pg-fg:#e8eaed;--pg-fg2:#a8adb4;--pg-bg:#15171a;--pg-card:#1b1d21;--pg-line:rgba(255,255,255,.12)}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--pg-bg);color:var(--pg-fg);
+font:14px/1.7 system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+.wrap{max-width:860px;margin:0 auto;padding:28px 20px 60px}
+a{color:inherit}
+.top{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:6px}
+h1{font-size:20px;margin:0;line-height:1.4}
+.sub{color:var(--pg-fg2);font-size:13px;margin:0 0 22px}
+.tag{font-size:11.5px;padding:2px 8px;border-radius:999px;color:#fff;white-space:nowrap}
+.q{background:var(--pg-card);border:1px solid var(--pg-line);border-left:3px solid #3964fe;
+border-radius:10px;padding:12px 14px;margin:0 0 18px;font-size:13.5px;white-space:pre-wrap}
+.stage{background:var(--pg-card);border:1px solid var(--pg-line);border-radius:14px;padding:14px}
+.back{display:inline-block;margin-bottom:16px;font-size:13px;color:var(--pg-fg2);text-decoration:none}
+.back:hover{color:var(--pg-fg)}
+.hint{color:var(--pg-fg2);font-size:12.5px;margin:14px 0 0}
+.grid{display:grid;gap:10px}
+.card{display:block;background:var(--pg-card);border:1px solid var(--pg-line);border-radius:12px;
+padding:12px 14px;text-decoration:none}
+.card:hover{border-color:#3964fe}
+.card h3{margin:0 0 4px;font-size:14.5px;line-height:1.45;font-weight:600}
+.card p{margin:0;font-size:12.5px;color:var(--pg-fg2)}
+.sec{margin:26px 0 10px;font-size:13px;font-weight:600;display:flex;align-items:center;gap:8px}
+.dot{width:9px;height:9px;border-radius:50%}
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="back" href="./index.html">← 返回全部演示</a>
+<div class="top">
+<h1>阅读理解题文对应：四类题各自看哪里</h1>
+<span class="tag" style="background:#8b5cf6">英语</span>
+</div>
+<p class="sub">阅读理解（细节·推断·主旨·猜词） · 示意图 · 15 个对象 · 6 个步骤 · 3 个重点步骤</p>
+<p class="q">高考英语阅读理解：细节题、推理题、猜词题、主旨题各自该回原文的哪个位置？</p>
+<div class="stage"><div id="hst-root"></div></div>
+<p class="hint">点步骤编号或 ▶ 自动播放；★ 是重点步骤。2D 图可拖动平移、滚轮缩放；3D 图可拖动旋转、双击复位。键盘 ← → 切步，空格播放。</p>
+</div>
+<script src="./hst-engine.js"></script>
+<script>
+(function () {
+  var NS = (typeof globalThis !== 'undefined' && globalThis.__HST__) || window.__HST__;
+  var THEMES = {"light":{"fg":"#0f1115","fg2":"#61666b","fg3":"#81858c","bg":"#ffffff","bg2":"rgba(38,49,72,.05)","line":"rgba(0,0,0,.12)","brand":"#3964fe","good":"#16a34a","warn":"#e08b1a","bad":"#dc2626","scheme":"light"},"dark":{"fg":"#e8eaed","fg2":"#a8adb4","fg3":"#82878e","bg":"#1b1d21","bg2":"rgba(255,255,255,.06)","line":"rgba(255,255,255,.14)","brand":"#6f8cff","good":"#3ec46d","warn":"#f0a93a","bad":"#f26a6a","scheme":"dark"}};
+  var dark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  var player = NS.mount({
+    mode: 'panel',
+    theme: dark ? THEMES.dark : THEMES.light,
+    scene: {"v":1,"kind":"diagram2d","title":"阅读理解题文对应：四类题各自看哪里","subject":"english","topic":"阅读理解（细节·推断·主旨·猜词）","caption":"四类题 = 四种「离原文的距离」：细节贴着句子，推理跳一步，猜词看上下文，主旨看结构","view":{"xMin":0,"xMax":100,"yMin":0,"yMax":63},"objects":[{"id":"p1","type":"box","color":"#81858c","text":"① 引入现象：人人反复读笔记，感觉很有效","x":28,"y":50,"w":42,"h":8},{"id":"p2","type":"box","color":"#2f6df6","text":"② 实验：一组重读 / 一组回忆默写\n五分钟后重读组略优，一周后反转","x":28,"y":39,"w":42,"h":8},{"id":"p3","type":"box","color":"#e08b1a","text":"③ 解释：流畅感骗了他们\n回忆难，而难正是关键","x":28,"y":28,"w":42,"h":8},{"id":"p4","type":"box","color":"#16a34a","text":"④ 启示：合上书、自问、分散到多天","x":28,"y":17,"w":42,"h":8},{"id":"whole","type":"box","color":"#8b5cf6","text":"全文结构：现象 → 实验 → 反转 → 主张","hidden":true,"x":28,"y":5,"w":42,"h":7},{"id":"q1","type":"box","color":"#2f6df6","text":"第1题　细节理解","hidden":true,"x":80,"y":44,"w":34,"h":7},{"id":"q2","type":"box","color":"#e08b1a","text":"第2题　推理判断","hidden":true,"x":80,"y":32,"w":34,"h":7},{"id":"q3","type":"box","color":"#16a34a","text":"第3题　词义猜测","hidden":true,"x":80,"y":20,"w":34,"h":7},{"id":"q4","type":"box","color":"#8b5cf6","text":"第4题　主旨标题","hidden":true,"x":80,"y":6,"w":34,"h":7},{"id":"a1","type":"arrow","color":"#2f6df6","dash":true,"text":"定位一句","hidden":true,"of":"q1","target":"p2"},{"id":"a2","type":"arrow","color":"#e08b1a","dash":true,"text":"跳一步","hidden":true,"of":"q2","target":"p3"},{"id":"a3","type":"arrow","color":"#16a34a","dash":true,"text":"看上下文","hidden":true,"of":"q3","target":"p4"},{"id":"a4","type":"arrow","color":"#8b5cf6","dash":true,"text":"看结构","hidden":true,"of":"q4","target":"whole"},{"id":"trap","type":"text","color":"#dc2626","size":11,"text":"干扰项四套路：无关项・相反项・过度推断・以偏概全","hidden":true,"x":50,"y":57},{"id":"flow","type":"text","color":"#61666b","size":11,"text":"通用流程：读题干定题型 → 回原文定位 → 比对同义改写 → 逐项排干扰","hidden":true,"x":50,"y":60.5}],"steps":[{"title":"第一遍：只标段落功能，不逐词读","detail":"高考阅读不是逐词翻译。第一遍只做一件事：搞清每段在干什么。这篇是典型的科普说明文四段式：提现象 → 举实验 → 给解释 → 落启示。把这四个功能标出来，后面四道题就知道去哪段找。","formula":"科普说明文常规骨架：现象 → 实验 → 解释 → 启示","key":false,"focus":["p1","p2","p3","p4"]},{"title":"细节题：贴着原文一句","detail":"题干里的 five minutes after 是定位词，直接回第二段找到“Five minutes later, the rereaders performed slightly better”。细节题的答案就是这句的**同义改写**，多推一步就错。注意选项 B 把两个时间点的结果调了个头——这是“相反项”。","formula":"细节题：题干定位词 → 原文一句 → 同义改写","key":true,"show":["q1","a1"],"focus":["q1","p2"]},{"title":"推理题：只能跳一步","detail":"问“为何仍在重读”，原文没有直接回答，但第三段说了“Fluency had fooled them… took that ease as evidence of learning”。从“读得顺就以为学会了”到“所以他们继续重读”，只跳了一步——这就是推理题的尺度。**跳两步就叫过度推断**，比如把“重读不高效”读成“重读没用”。","formula":"推理题：有原文依据 + 只跳一步","key":true,"show":["q2","a2"],"focus":["q2","p3"]},{"title":"猜词题：不靠背过的词义","detail":"unglamorous 背不背得过都不要紧，后文就是解释：“None of this is pleasant, and none of it will make you feel clever”——不让人舒服、不让人显得聊明 ⇒ 不光鲜、不吸引人。猜词线索只有三类：后文解释、并列同义、因果与对比。","formula":"猜词题：答案永远在上下文，不在单词表里","key":false,"show":["q3","a3"],"focus":["q3","p4"]},{"title":"主旨题：靠结构，不靠句子","detail":"主旨题要回到四段的整体走向：文章不是为了介绍一个实验，而是为了主张“少读多测”。标题三标准：覆盖全文、点明主张、不过窄不过宽。“A Classic Experiment in Psychology”过窄（实验只是论据），这就是“以偏概全”型干扰。","formula":"主旨题：看段落结构，不看某一句","key":true,"show":["whole","q4","a4"],"focus":["q4","whole"]},{"title":"总结：四种距离与四套干扰","detail":"四条虚线把四类题各自的“离原文距离”画清楚了：越往下，允许离原文越远。做题时先用题干定题型，就知道自己该贴多紧。干扰项则只有四套路，认熟了就能反向排除。","formula":"读题干定题型 → 回原文定位 → 比对同义改写 → 逐项排干扰","key":false,"show":["trap","flow"],"focus":["a1","a2","a3","a4","trap"]}]}
+  });
+  // 跟随系统明暗切换：重新桥接调色板并重绘
+  if (window.matchMedia) {
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function (ev) {
+      NS.applyTheme(ev.matches ? THEMES.dark : THEMES.light);
+      player.render();
+    });
+  }
+})();
+</script>
+</body>
+</html>

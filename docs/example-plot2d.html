@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>导数的几何意义：f(x)=x³−3x 在 x=1 处的切线 · 高中助学动态演示</title>
+<style>
+:root{color-scheme:light dark;--pg-fg:#0f1115;--pg-fg2:#61666b;--pg-bg:#fff;--pg-card:#fff;--pg-line:rgba(0,0,0,.1)}
+@media (prefers-color-scheme:dark){:root{--pg-fg:#e8eaed;--pg-fg2:#a8adb4;--pg-bg:#15171a;--pg-card:#1b1d21;--pg-line:rgba(255,255,255,.12)}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--pg-bg);color:var(--pg-fg);
+font:14px/1.7 system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+.wrap{max-width:860px;margin:0 auto;padding:28px 20px 60px}
+a{color:inherit}
+.top{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:6px}
+h1{font-size:20px;margin:0;line-height:1.4}
+.sub{color:var(--pg-fg2);font-size:13px;margin:0 0 22px}
+.tag{font-size:11.5px;padding:2px 8px;border-radius:999px;color:#fff;white-space:nowrap}
+.q{background:var(--pg-card);border:1px solid var(--pg-line);border-left:3px solid #3964fe;
+border-radius:10px;padding:12px 14px;margin:0 0 18px;font-size:13.5px;white-space:pre-wrap}
+.stage{background:var(--pg-card);border:1px solid var(--pg-line);border-radius:14px;padding:14px}
+.back{display:inline-block;margin-bottom:16px;font-size:13px;color:var(--pg-fg2);text-decoration:none}
+.back:hover{color:var(--pg-fg)}
+.hint{color:var(--pg-fg2);font-size:12.5px;margin:14px 0 0}
+.grid{display:grid;gap:10px}
+.card{display:block;background:var(--pg-card);border:1px solid var(--pg-line);border-radius:12px;
+padding:12px 14px;text-decoration:none}
+.card:hover{border-color:#3964fe}
+.card h3{margin:0 0 4px;font-size:14.5px;line-height:1.45;font-weight:600}
+.card p{margin:0;font-size:12.5px;color:var(--pg-fg2)}
+.sec{margin:26px 0 10px;font-size:13px;font-weight:600;display:flex;align-items:center;gap:8px}
+.dot{width:9px;height:9px;border-radius:50%}
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="back" href="./index.html">← 返回全部演示</a>
+<div class="top">
+<h1>导数的几何意义：f(x)=x³−3x 在 x=1 处的切线</h1>
+<span class="tag" style="background:#2f6df6">数学</span>
+</div>
+<p class="sub">一元函数的导数及其应用 · 平面坐标系 · 9 个对象 · 5 个步骤 · 1 个重点步骤</p>
+
+<div class="stage"><div id="hst-root"></div></div>
+<p class="hint">点步骤编号或 ▶ 自动播放；★ 是重点步骤。2D 图可拖动平移、滚轮缩放；3D 图可拖动旋转、双击复位。键盘 ← → 切步，空格播放。</p>
+</div>
+<script src="./hst-engine.js"></script>
+<script>
+(function () {
+  var NS = (typeof globalThis !== 'undefined' && globalThis.__HST__) || window.__HST__;
+  var THEMES = {"light":{"fg":"#0f1115","fg2":"#61666b","fg3":"#81858c","bg":"#ffffff","bg2":"rgba(38,49,72,.05)","line":"rgba(0,0,0,.12)","brand":"#3964fe","good":"#16a34a","warn":"#e08b1a","bad":"#dc2626","scheme":"light"},"dark":{"fg":"#e8eaed","fg2":"#a8adb4","fg3":"#82878e","bg":"#1b1d21","bg2":"rgba(255,255,255,.06)","line":"rgba(255,255,255,.14)","brand":"#6f8cff","good":"#3ec46d","warn":"#f0a93a","bad":"#f26a6a","scheme":"dark"}};
+  var dark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  var player = NS.mount({
+    mode: 'panel',
+    theme: dark ? THEMES.dark : THEMES.light,
+    scene: {"v":1,"kind":"plot2d","title":"导数的几何意义：f(x)=x³−3x 在 x=1 处的切线","subject":"math","topic":"一元函数的导数及其应用","caption":"切线斜率 = 该点导数值；极值点处导数为 0","view":{"xMin":-2.6,"xMax":2.6,"yMin":-3.4,"yMax":3.4,"xLabel":"x","yLabel":"y"},"objects":[{"id":"curve","type":"func","width":2.3,"label":"f(x)=x^3-3x","expr":"x^3-3x"},{"id":"dmin","type":"point","color":"#dc2626","label":"B(1,−2)","x":1,"y":-2},{"id":"dmax","type":"point","color":"#16a34a","label":"A(−1,2)","hidden":true,"x":-1,"y":2},{"id":"tan","type":"tangent","label":"k=f′(1)=0","hidden":true,"at":1,"of":"curve"},{"id":"tan2","type":"tangent","color":"#8b5cf6","label":"k=f′(2)=9","hidden":true,"at":2,"of":"curve"},{"id":"p2","type":"point","color":"#8b5cf6","label":"C(2,2)","hidden":true,"x":2,"y":2},{"id":"zero","type":"line","color":"#81858c","dash":true,"hidden":true,"b":0,"k":0},{"id":"note","type":"label","color":"#16a34a","text":"极大值 f(−1)=2","hidden":true,"x":-1.55,"y":2.75},{"id":"note2","type":"label","color":"#dc2626","text":"极小值 f(1)=−2","hidden":true,"x":1.5,"y":-2.75}],"steps":[{"title":"先画出函数图象","detail":"三次函数，最高次系数为正，图象「先升后降再升」。","formula":"f(x) = x³ − 3x","key":false,"focus":["curve"]},{"title":"求导，找导数为零的点","detail":"f′(x)=3x²−3=3(x−1)(x+1)，令它为 0 得 x=±1。","formula":"f′(x) = 3x² − 3 = 3(x−1)(x+1)","key":false,"show":["dmax","zero"],"focus":["dmin","dmax"]},{"title":"导数为零处切线水平","detail":"在 x=1 处作切线，斜率恰为 f′(1)=0——切线与 x 轴平行，这正是「极值点处导数为零」的图形含义。","formula":"f′(1) = 3·1² − 3 = 0","key":true,"show":["tan","note","note2"],"focus":["tan","dmin"]},{"title":"换一点看斜率","detail":"在 x=2 处，f′(2)=9，切线明显变陡。导数值的大小就是切线的倾斜程度。","formula":"f′(2) = 3·4 − 3 = 9","key":false,"show":["p2","tan2"],"hide":["tan"],"focus":["tan2","p2"]},{"title":"结论","detail":"导数 = 切线斜率。求极值先解 f′(x)=0，再用 f′ 的符号判断是极大还是极小。","formula":"f′(x) > 0 ⇒ 递增；f′(x) < 0 ⇒ 递减","key":false,"show":["tan"],"focus":["curve"]}]}
+  });
+  // 跟随系统明暗切换：重新桥接调色板并重绘
+  if (window.matchMedia) {
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function (ev) {
+      NS.applyTheme(ev.matches ? THEMES.dark : THEMES.light);
+      player.render();
+    });
+  }
+})();
+</script>
+</body>
+</html>

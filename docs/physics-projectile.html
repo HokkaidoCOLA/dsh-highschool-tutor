@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>平抛运动：分解、落地时间与落地速度 · 高中助学动态演示</title>
+<style>
+:root{color-scheme:light dark;--pg-fg:#0f1115;--pg-fg2:#61666b;--pg-bg:#fff;--pg-card:#fff;--pg-line:rgba(0,0,0,.1)}
+@media (prefers-color-scheme:dark){:root{--pg-fg:#e8eaed;--pg-fg2:#a8adb4;--pg-bg:#15171a;--pg-card:#1b1d21;--pg-line:rgba(255,255,255,.12)}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--pg-bg);color:var(--pg-fg);
+font:14px/1.7 system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+.wrap{max-width:860px;margin:0 auto;padding:28px 20px 60px}
+a{color:inherit}
+.top{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:6px}
+h1{font-size:20px;margin:0;line-height:1.4}
+.sub{color:var(--pg-fg2);font-size:13px;margin:0 0 22px}
+.tag{font-size:11.5px;padding:2px 8px;border-radius:999px;color:#fff;white-space:nowrap}
+.q{background:var(--pg-card);border:1px solid var(--pg-line);border-left:3px solid #3964fe;
+border-radius:10px;padding:12px 14px;margin:0 0 18px;font-size:13.5px;white-space:pre-wrap}
+.stage{background:var(--pg-card);border:1px solid var(--pg-line);border-radius:14px;padding:14px}
+.back{display:inline-block;margin-bottom:16px;font-size:13px;color:var(--pg-fg2);text-decoration:none}
+.back:hover{color:var(--pg-fg)}
+.hint{color:var(--pg-fg2);font-size:12.5px;margin:14px 0 0}
+.grid{display:grid;gap:10px}
+.card{display:block;background:var(--pg-card);border:1px solid var(--pg-line);border-radius:12px;
+padding:12px 14px;text-decoration:none}
+.card:hover{border-color:#3964fe}
+.card h3{margin:0 0 4px;font-size:14.5px;line-height:1.45;font-weight:600}
+.card p{margin:0;font-size:12.5px;color:var(--pg-fg2)}
+.sec{margin:26px 0 10px;font-size:13px;font-weight:600;display:flex;align-items:center;gap:8px}
+.dot{width:9px;height:9px;border-radius:50%}
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="back" href="./index.html">← 返回全部演示</a>
+<div class="top">
+<h1>平抛运动：分解、落地时间与落地速度</h1>
+<span class="tag" style="background:#0f9d8f">物理</span>
+</div>
+<p class="sub">抛体运动 · 力学场景 · 15 个对象 · 6 个步骤 · 2 个重点步骤</p>
+<p class="q">小球以 v₀ = 5 m/s 从 h = 20 m 高处水平抛出，求飞行时间、水平射程、落地速度；若 v₀ 加倍会怎样？</p>
+<div class="stage"><div id="hst-root"></div></div>
+<p class="hint">点步骤编号或 ▶ 自动播放；★ 是重点步骤。2D 图可拖动平移、滚轮缩放；3D 图可拖动旋转、双击复位。键盘 ← → 切步，空格播放。</p>
+</div>
+<script src="./hst-engine.js"></script>
+<script>
+(function () {
+  var NS = (typeof globalThis !== 'undefined' && globalThis.__HST__) || window.__HST__;
+  var THEMES = {"light":{"fg":"#0f1115","fg2":"#61666b","fg3":"#81858c","bg":"#ffffff","bg2":"rgba(38,49,72,.05)","line":"rgba(0,0,0,.12)","brand":"#3964fe","good":"#16a34a","warn":"#e08b1a","bad":"#dc2626","scheme":"light"},"dark":{"fg":"#e8eaed","fg2":"#a8adb4","fg3":"#82878e","bg":"#1b1d21","bg2":"rgba(255,255,255,.06)","line":"rgba(255,255,255,.14)","brand":"#6f8cff","good":"#3ec46d","warn":"#f0a93a","bad":"#f26a6a","scheme":"dark"}};
+  var dark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  var player = NS.mount({
+    mode: 'panel',
+    theme: dark ? THEMES.dark : THEMES.light,
+    scene: {"v":1,"kind":"mech2d","title":"平抛运动：分解、落地时间与落地速度","subject":"physics","topic":"抛体运动","caption":"轨迹由引擎按 v₀、g 逐点算出；最后一步按播放键，三个球会同时落地","view":{"xMin":-4,"xMax":26,"yMin":-8,"yMax":24,"axis":false,"equal":true},"objects":[{"id":"gnd","type":"ground","color":"#61666b","y":0,"x1":-4,"x2":26},{"id":"plat","type":"body","color":"#81858c","x":-1.5,"y":10,"w":3,"h":20,"shape":"rect"},{"id":"ball","type":"body","color":"#0f9d8f","x":0,"y":20,"r":0.6,"shape":"circle"},{"id":"v0","type":"velocity","color":"#2f6df6","label":"v₀=5 m/s","x":0,"y":20,"angle":0,"scale":0.55},{"id":"hdim","type":"dim","color":"#81858c","label":"h=20 m","x1":-2.9,"y1":0,"x2":-2.9,"y2":20},{"id":"traj","type":"path","color":"#2f6df6","dash":true,"hidden":true,"x":0,"y":20,"a":10,"to":2,"angle":0,"value":5,"preset":"projectile"},{"id":"xdim","type":"dim","color":"#2f6df6","label":"x=10 m","hidden":true,"x1":0,"y1":-2.4,"x2":10,"y2":-2.4},{"id":"land","type":"label","text":"落地点","hidden":true,"x":10,"y":1.6},{"id":"vx","type":"velocity","color":"#2f6df6","label":"v₀=5","hidden":true,"x":10,"y":0,"angle":0,"scale":0.3},{"id":"vy","type":"velocity","color":"#2f6df6","label":"v_y=20","hidden":true,"x":10,"y":0,"angle":-90,"scale":0.3},{"id":"vres","type":"velocity","color":"#dc2626","width":2.6,"label":"v≈20.6 m/s","hidden":true,"x":10,"y":0,"angle":-76,"scale":0.3},{"id":"ang","type":"angle","color":"#e08b1a","label":"θ≈76°","hidden":true,"r":2.6,"points":[[10,0],[13.5,0],[11.5,-6]]},{"id":"traj2","type":"path","color":"#e08b1a","dash":true,"hidden":true,"x":0,"y":20,"a":10,"to":2,"angle":0,"value":10,"preset":"projectile"},{"id":"traj3","type":"path","color":"#16a34a","dash":true,"hidden":true,"x":0,"y":20,"a":10,"to":2,"angle":0,"value":0,"preset":"projectile"},{"id":"note","type":"label","color":"#dc2626","text":"三球始终同高、同时落地","hidden":true,"x":17,"y":22}],"steps":[{"title":"第一步：标出已知量","detail":"「水平抛出」两个关键词：初速度水平，抛出后只受重力。先把已知量标在图上：抛出点高 20 m，初速度 5 m/s 指向水平。","formula":"v₀ = 5 m/s　h = 20 m　g = 10 m/s²","key":false,"focus":["ball","v0","hdim"]},{"title":"第二步：分解——两个方向各自独立","detail":"平抛只有一个解题思路：把运动拆成两个互不影响的方向——水平方向没有力，所以匀速；竖直方向只有重力，所以是自由落体。图上这条抛物线就是引擎按这两个公式逐点算出来的。","formula":"水平：x = v₀t（匀速）　竖直：y = ½gt²（自由落体）","key":true,"show":["traj"],"focus":["traj"]},{"title":"第三步：求时间（只由高度决定）","detail":"求时间只能看竖直方向。竖直上它就是一个从 20 m 高处的自由落体，与水平初速度完全无关——公式里根本没有 v₀。这是本题后面几问的基础。","formula":"h = ½gt² ⇒ t = √(2h/g) = √(2×20/10) = 2 s","key":false,"focus":["hdim"]},{"title":"第四步：求水平射程","detail":"时间算出来了，带回水平方向即可。注意对照图形：引擎画出的抛物线恰好落在 x = 10 m 处——这条曲线不是画上去的，而是用 v₀ 与 g 逐点算的，所以它可以用来验算答案。","formula":"x = v₀t = 5 × 2 = 10 m","key":false,"show":["xdim","land"],"focus":["xdim","land"]},{"title":"第五步：求落地速度与方向","detail":"落地速度是两个分速度的矢量合成，不能直接相加。图上蓝色是两个分速度（长度比 1:4），红色是合速度。另外提醒：速度偏角 θ≈76° 与位移偏角 α≈63.4° 不是同一个角，两者永远满足 tanθ = 2tanα。","formula":"v_y = gt = 20 m/s　v = √(5²+20²) = √425 ≈ 20.6 m/s　tanθ = 4 ⇒ θ ≈ 76°","key":false,"show":["vx","vy","vres","ang"],"focus":["vres","ang"]},{"title":"第六步：改大 v₀——时间不变、射程加倍","detail":"现在同时抛出三个球：绿色 v₀=0（自由落体）、蓝色 v₀=5、橙色 v₀=10。按下播放键会看到：三个球始终处在同一水平高度上，并且同时落地，只是飞得远近不同。因为竖直方向的运动完全一样，v₀ 只影响水平位移。","formula":"t = √(2h/g) 与 v₀ 无关（仍 2 s）　x = v₀t ∵ v₀ 加倍 ⇒ 射程加倍为 20 m","key":true,"show":["traj2","traj3","note"],"hide":["vx","vy","vres","ang","xdim","land"],"focus":["traj2","traj3","note"]}]}
+  });
+  // 跟随系统明暗切换：重新桥接调色板并重绘
+  if (window.matchMedia) {
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function (ev) {
+      NS.applyTheme(ev.matches ? THEMES.dark : THEMES.light);
+      player.render();
+    });
+  }
+})();
+</script>
+</body>
+</html>

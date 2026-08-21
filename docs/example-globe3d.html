@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>夏至日光照图与正午太阳高度 · 高中助学动态演示</title>
+<style>
+:root{color-scheme:light dark;--pg-fg:#0f1115;--pg-fg2:#61666b;--pg-bg:#fff;--pg-card:#fff;--pg-line:rgba(0,0,0,.1)}
+@media (prefers-color-scheme:dark){:root{--pg-fg:#e8eaed;--pg-fg2:#a8adb4;--pg-bg:#15171a;--pg-card:#1b1d21;--pg-line:rgba(255,255,255,.12)}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--pg-bg);color:var(--pg-fg);
+font:14px/1.7 system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+.wrap{max-width:860px;margin:0 auto;padding:28px 20px 60px}
+a{color:inherit}
+.top{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:6px}
+h1{font-size:20px;margin:0;line-height:1.4}
+.sub{color:var(--pg-fg2);font-size:13px;margin:0 0 22px}
+.tag{font-size:11.5px;padding:2px 8px;border-radius:999px;color:#fff;white-space:nowrap}
+.q{background:var(--pg-card);border:1px solid var(--pg-line);border-left:3px solid #3964fe;
+border-radius:10px;padding:12px 14px;margin:0 0 18px;font-size:13.5px;white-space:pre-wrap}
+.stage{background:var(--pg-card);border:1px solid var(--pg-line);border-radius:14px;padding:14px}
+.back{display:inline-block;margin-bottom:16px;font-size:13px;color:var(--pg-fg2);text-decoration:none}
+.back:hover{color:var(--pg-fg)}
+.hint{color:var(--pg-fg2);font-size:12.5px;margin:14px 0 0}
+.grid{display:grid;gap:10px}
+.card{display:block;background:var(--pg-card);border:1px solid var(--pg-line);border-radius:12px;
+padding:12px 14px;text-decoration:none}
+.card:hover{border-color:#3964fe}
+.card h3{margin:0 0 4px;font-size:14.5px;line-height:1.45;font-weight:600}
+.card p{margin:0;font-size:12.5px;color:var(--pg-fg2)}
+.sec{margin:26px 0 10px;font-size:13px;font-weight:600;display:flex;align-items:center;gap:8px}
+.dot{width:9px;height:9px;border-radius:50%}
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="back" href="./index.html">← 返回全部演示</a>
+<div class="top">
+<h1>夏至日光照图与正午太阳高度</h1>
+<span class="tag" style="background:#6b8f2f">地理</span>
+</div>
+<p class="sub">地球的运动 · 地球光照 · 5 个对象 · 4 个步骤 · 1 个重点步骤</p>
+
+<div class="stage"><div id="hst-root"></div></div>
+<p class="hint">点步骤编号或 ▶ 自动播放；★ 是重点步骤。2D 图可拖动平移、滚轮缩放；3D 图可拖动旋转、双击复位。键盘 ← → 切步，空格播放。</p>
+</div>
+<script src="./hst-engine.js"></script>
+<script>
+(function () {
+  var NS = (typeof globalThis !== 'undefined' && globalThis.__HST__) || window.__HST__;
+  var THEMES = {"light":{"fg":"#0f1115","fg2":"#61666b","fg3":"#81858c","bg":"#ffffff","bg2":"rgba(38,49,72,.05)","line":"rgba(0,0,0,.12)","brand":"#3964fe","good":"#16a34a","warn":"#e08b1a","bad":"#dc2626","scheme":"light"},"dark":{"fg":"#e8eaed","fg2":"#a8adb4","fg3":"#82878e","bg":"#1b1d21","bg2":"rgba(255,255,255,.06)","line":"rgba(255,255,255,.14)","brand":"#6f8cff","good":"#3ec46d","warn":"#f0a93a","bad":"#f26a6a","scheme":"dark"}};
+  var dark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  var player = NS.mount({
+    mode: 'panel',
+    theme: dark ? THEMES.dark : THEMES.light,
+    scene: {"v":1,"kind":"globe3d","title":"夏至日光照图与正午太阳高度","subject":"geography","topic":"地球的运动","caption":"太阳直射北回归线，北极圈内极昼","view":{"yaw":-28,"pitch":14},"objects":[{"id":"earth","type":"globe","label":"夏至日（6 月 22 日前后）","declination":23.5},{"id":"rays","type":"sunray","label":"太阳光","n":5},{"id":"bj","type":"point","label":"北京 N40°","hidden":true,"value":1,"lat":40,"lon":0},{"id":"trop","type":"point","color":"#e08b1a","label":"直射点","hidden":true,"lat":23.5,"lon":0},{"id":"polar","type":"arc","color":"#16a34a","label":"极昼","hidden":true,"from":-180,"to":180,"lat":70}],"steps":[{"title":"先定直射点纬度","detail":"夏至日太阳直射北回归线，即直射点纬度 δ = 23.5°N。这是全部计算的起点。","formula":"δ = 23°26′N ≈ 23.5°N","key":false,"show":["trop"],"focus":["trop"]},{"title":"找晨昏线与昼夜分布","detail":"黄色大圆是晨昏线，它把地球分成昼半球与夜半球；此时北极圈及其以北出现极昼。","formula":"","key":false,"show":["polar"],"focus":["polar"]},{"title":"用纬度差求正午太阳高度","detail":"关键公式：正午太阳高度 = 90° − |当地纬度 − 直射点纬度|。北京 40°N 与 23.5°N 相差 16.5°，所以 H = 73.5°。","formula":"H = 90° − |φ − δ| = 90° − |40° − 23.5°| = 73.5°","key":true,"show":["bj"],"focus":["bj"]},{"title":"推广到其他日期","detail":"换成冬至就把 δ 取 −23.5°，二分取 0°；公式不变，只换 δ。","formula":"冬至：H = 90° − |40° − (−23.5°)| = 26.5°","key":false,"focus":["earth"]}]}
+  });
+  // 跟随系统明暗切换：重新桥接调色板并重绘
+  if (window.matchMedia) {
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function (ev) {
+      NS.applyTheme(ev.matches ? THEMES.dark : THEMES.light);
+      player.render();
+    });
+  }
+})();
+</script>
+</body>
+</html>

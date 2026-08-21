@@ -1,0 +1,18 @@
+# dsh-highschool-tutor bundle layer.
+#
+# package.json 声明了 dsh.bundle.patch（本文件），因此
+#   dsh plugin --profile web add /path/to/dsh-highschool-tutor
+# 安装本包后，这条 insert 会随 bundle 层自动并入 profile 的插件树，
+# 无需手工编辑 profile 的 cordis.patch.yml。
+#
+# 后续层（profile 自己的 cordis.patch.yml、--patch 覆盖）可按 id 覆写
+# 下面的 config，例如：
+#
+#   - id: highschool-tutor
+#     config:
+#       badge: false          # 关掉标题栏待复习徽标
+#       dailyReviewTarget: 60 # 每日复习目标条数
+
+- insert:
+    - id: highschool-tutor
+      name: '@dsh-external/dsh-highschool-tutor'
