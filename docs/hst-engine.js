@@ -3394,6 +3394,7 @@
       var wrap = el('div', 'hst')
 
       var top = el('div', 'hst_top')
+      this.elTop = top
       this.elTitle = el('div', 'hst_t')
       this.elCap = el('div', 'hst_cap')
       this.elTag = el('div', 'hst_tag')
@@ -3547,6 +3548,13 @@
       this.layout()
       this.go(this.scene && this.scene.steps && this.scene.steps.length > 0 ? 0 : -1)
       if (this.animated) this.startRaf()
+      this.applyBare()
+    },
+
+    /** bare：只画图示与步骤条，不显示顶部标题/副标题行（抽题卡的右侧图示区要纯图）。 */
+    applyBare: function () {
+      if (!this.elTop) return
+      this.elTop.style.display = this.bare === true ? 'none' : ''
     },
 
     /** 渲染标题栏与步骤芯片等固定部分。 */
@@ -3605,7 +3613,7 @@
     /** 按容器宽度决定画布尺寸。 */
     layout: function () {
       var width = Math.max(160, this.elStage.clientWidth || this.root.clientWidth || 320)
-      var ratio = this.mode === 'panel' ? 0.78 : 0.62
+      var ratio = Number.isFinite(this.viewRatio) ? this.viewRatio : (this.mode === 'panel' ? 0.78 : 0.62)
       var min = this.mode === 'panel' ? 240 : 190
       var max = this.mode === 'panel' ? 520 : 360
       var height = NS.clamp(Math.round(width * ratio), min, max)
@@ -3869,6 +3877,8 @@
         if (typeof data.token === 'string' && data.token !== '') player.token = data.token
         if (data.theme) applyTheme(data.theme)
         if (data.mode) { player.mode = data.mode }
+        if (data.bare === true) player.bare = true
+        if (Number.isFinite(data.ratio)) player.viewRatio = data.ratio
         player.load(data.scene)
       } else if (data.type === MSG.step && typeof data.index === 'number') {
         if (player.token && data.token && data.token !== player.token) return
