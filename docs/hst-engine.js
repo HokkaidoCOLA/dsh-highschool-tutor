@@ -3893,11 +3893,13 @@
         if (typeof data.token === 'string' && data.token !== '') player.token = data.token
         if (data.theme) applyTheme(data.theme)
         if (data.mode) { player.mode = data.mode }
-        if (data.bare === true) player.bare = true
-        if (data.compact === true) player.compact = true
-        if (data.lockFirst === true) player.lockFirst = true
-        if (data.questionsOnly === true) player.questionsOnly = true
+        // 每个标志显式赋值（缺省即关闭）：同一 iframe 被复用时不会残留
+        player.bare = data.bare === true
+        player.compact = data.compact === true
+        player.lockFirst = data.lockFirst === true
+        player.questionsOnly = data.questionsOnly === true
         if (Number.isFinite(data.ratio)) player.viewRatio = data.ratio
+        else player.viewRatio = undefined
         player.load(data.scene)
       } else if (data.type === MSG.step && typeof data.index === 'number') {
         if (player.token && data.token && data.token !== player.token) return

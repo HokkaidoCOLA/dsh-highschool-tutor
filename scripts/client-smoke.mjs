@@ -270,9 +270,11 @@ const deckMeta = {
     preview: { again: 0, hard: 1, good: 2, easy: 4 }, masteryScore: 55,
   }],
 }
-const deckHtml = render('复习翻卡（首张）', React.createElement(mod.DemoToolView, { callId: 'd1', toolName: 'tutor_review_deck', block: { kind: 'tool-result', isError: false, content: [{ type: 'text', text: '已把 1 张卡片放进对话' }], meta: deckMeta } }))
+const deckHtml = render('复习翻卡套组（首张）', React.createElement(mod.DeckToolView, { callId: 'd1', toolName: 'tutor_review_deck', block: { kind: 'tool-result', isError: false, content: [{ type: 'text', text: '已把 1 张卡片放进对话' }], meta: deckMeta } }))
 ok('翻卡显示题干与进度、不露答案', deckHtml.includes('求 f(x)=x^3-3x') && deckHtml.includes('1 / 1') && deckHtml.includes('显示答案') && !deckHtml.includes('极大值 2'))
 ok('翻卡头部有学科/难度与评分说明', deckHtml.includes('难度 3') && deckHtml.includes('空格翻面'))
+const deckRunningHtml = render('复习翻卡（运行中）', React.createElement(mod.DeckToolView, { callId: 'd2', toolName: 'tutor_review_deck', block: { running: true } }))
+ok('翻卡套组运行中不崩（hook 数量稳定）', deckRunningHtml.includes('复习翻卡') && deckRunningHtml.includes('生成中'))
 render('设置页小卡片抽题（取队列中）', React.createElement(mod.QueueRunner, { onExit: () => {} }))
 const quizHtml = render('设置页小卡片抽题（宽屏弹层）', React.createElement(mod.QueueRunner, { onExit: () => {} }))
 ok('小卡片抽题以宽屏居中弹层呈现（横版观感）', quizHtml.includes('hst_quizWrap') && quizHtml.includes('hst_quiz'))
