@@ -586,6 +586,21 @@ section('⑦ 与父窗口的消息协议')
   // 高度上报（reportHeight 有 30ms 防抖）
   await new Promise((r) => setTimeout(r, 60))
   ok(env.messages.some((m) => m.type === 'hst:height' && m.height > 0), '上报内容高度供父窗口调整 iframe')
+
+  // questionsOnly：翻面前只显示带 q:true 的题面对象（强制可见），不泄露解法
+  const sceneQ = normalizeScene({
+    kind: 'diagram2d', title: 'q 测试', view: { xMin: 0, xMax: 100, yMin: 0, yMax: 60 },
+    objects: [
+      { id: 'given', type: 'box', text: '题面', x: 20, y: 30, w: 20, h: 8, q: true },
+      { id: 'back', type: 'box', text: '解法', x: 60, y: 30, w: 20, h: 8, hidden: true },
+    ],
+    steps: [{ title: '第一步', show: ['back'] }],
+  })
+  listener({ data: { type: 'hst:scene', token: 'tk2', mode: 'panel', scene: sceneQ.scene, questionsOnly: true, lockFirst: true } })
+  const qObjects = player.derive(player.index).objects
+  ok(qObjects.length === 1 && qObjects[0].id === 'given' && qObjects[0].hidden !== true,
+    `questionsOnly 只渲染 q 标记的题面对象且强制可见（实际 ${qObjects.map((o) => o.id).join(',')}）`)
+  ok(player.questionsOnly === true && player.lockFirst === true, 'questionsOnly / lockFirst 随消息生效')
 }
 
 // ══ ⑧ 主题桥接 ════════════════════════════════════════════════════════════
