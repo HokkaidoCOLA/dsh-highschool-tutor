@@ -136,10 +136,12 @@ ok('首屏提示加载中', panelHtml.includes('正在加载'), panelHtml.slice(
 const badgeHtml = render('徽标（无数据时不占位）', React.createElement(mod.TutorBadge))
 ok('徽标无数据时渲染为空', badgeHtml === '')
 render('复习器（取队列中）', React.createElement(mod.ReviewRunner, {}))
-const reviewHtml = render('复习器（16:9 画幅）', React.createElement(mod.ReviewRunner, {}))
-ok('复习卡按 16:9 画幅渲染（加载态也成立）', reviewHtml.includes('hst_reviewStage') && reviewHtml.includes('hst_reviewEnd'))
+const reviewHtml = render('复习器（16:9 起步画幅）', React.createElement(mod.ReviewRunner, {}))
+ok('复习卡按画幅类渲染（加载态也成立）', reviewHtml.includes('hst_reviewStage') && reviewHtml.includes('hst_reviewEnd'))
 const cssText = styleTags[0]?.textContent ?? ''
-ok('复习卡样式声明 16:9、内容区滚动、评分区钉底', cssText.includes('aspect-ratio:16 / 9') && cssText.includes('hst_reviewBody') && cssText.includes('hst_reviewFoot'))
+ok('复习卡样式：16:9 只做最矮高度（变量驱动、封顶 60vh）', cssText.includes('min-height:min(var(--hst-minh,0px),60vh)') && cssText.includes('hst_reviewBody'))
+const bodyRule = cssText.match(/\.hst_reviewBody\{[^}]*\}/)?.[0] ?? ''
+ok('复习卡样式：内容区不内滚（随内容长高）', bodyRule !== '' && !bodyRule.includes('overflow'))
 
 // 带真实数据形态的面板：伪造 overview 响应后再渲染，覆盖各标签页渲染路径
 const overview = {
